@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>개인정보처리방침 - STÉRO Lite</title>
-  <meta name="description" content="STÉRO Lite 개인정보처리방침 (시행일: 2026-03-03)">
+  <meta name="description" content="STÉRO Lite 개인정보처리방침 (시행일: 2026-03-07)">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="website">
@@ -29,9 +29,10 @@
         <h1>개인정보처리방침</h1>
 
         <p>
-          <strong>시행일</strong>: 2026-03-03 &nbsp;|&nbsp;
+          <strong>시행일</strong>: 2026-03-07 &nbsp;|&nbsp;
           <strong>앱 이름</strong>: STÉRO Lite &nbsp;|&nbsp;
-          <strong>개발자</strong>: STÉRO
+          <strong>개발자</strong>: STÉRO &nbsp;|&nbsp;
+          <strong>번들 ID</strong>: com.STERO-Lite
         </p>
 
         <h2>1. 개인정보의 처리 목적</h2>
@@ -41,6 +42,7 @@
           <li>구독 및 크레딧 잔액 관리</li>
           <li>AI 음악 생성 요청 처리</li>
           <li>선물 코드 발급 및 교환</li>
+          <li>AI 에이전트 환경설정 저장</li>
           <li>서비스 개선 및 오류 분석</li>
         </ol>
 
@@ -58,6 +60,9 @@
             <tr><td>생성 이력 (taskId)</td><td>Firestore</td><td>생성된 음악 추적 및 다운로드</td></tr>
             <tr><td>선물 코드 이력</td><td>Firestore</td><td>선물 발급·교환 기록</td></tr>
             <tr><td>IAP 거래 ID</td><td>StoreKit 2 / Firestore</td><td>결제 중복 방지</td></tr>
+            <tr><td>AI 에이전트 환경설정</td><td>Firestore</td><td>음악 생성 취향 개인화</td></tr>
+            <tr><td>채팅 메시지 내용</td><td>서버 전달 (비저장)</td><td>GPT-4 대화 처리</td></tr>
+            <tr><td>허밍 오디오</td><td>서버 전달 (비저장)</td><td>Suno AI 음악 생성 참조</td></tr>
           </tbody>
         </table>
 
@@ -82,6 +87,7 @@
             <tr><td>선물 코드 이력</td><td>발급일로부터 1년</td><td>교환 내역 확인</td></tr>
             <tr><td>IAP 거래 ID</td><td>거래일로부터 1년</td><td>중복 결제 방지</td></tr>
             <tr><td>생성 이력</td><td>계정 삭제 시까지</td><td>생성 음악 다운로드</td></tr>
+            <tr><td>AI 에이전트 환경설정</td><td>계정 삭제 시까지</td><td>개인화 서비스 제공</td></tr>
           </tbody>
         </table>
 
@@ -102,6 +108,7 @@
             <tr><td>Apple</td><td>인앱 결제 처리</td><td>IAP 거래 정보 (Apple이 직접 관리)</td></tr>
             <tr><td>Suno</td><td>AI 음악 생성</td><td>생성 요청 텍스트, 허밍 오디오</td></tr>
             <tr><td>OpenAI</td><td>챗봇 대화 처리</td><td>채팅 메시지 내용</td></tr>
+            <tr><td>SerpAPI</td><td>차트·트렌드 검색</td><td>검색 쿼리 (개인정보 미포함)</td></tr>
           </tbody>
         </table>
         <p>각 위탁 업체는 자체 개인정보처리방침에 따라 정보를 처리합니다:</p>
@@ -109,6 +116,7 @@
           <li>Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
           <li>Apple: <a href="https://www.apple.com/kr/privacy/" target="_blank" rel="noopener noreferrer">https://www.apple.com/kr/privacy/</a></li>
           <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer">https://openai.com/policies/privacy-policy</a></li>
+          <li>Suno: <a href="https://suno.com/privacy" target="_blank" rel="noopener noreferrer">https://suno.com/privacy</a></li>
         </ul>
 
         <h2>6. 개인정보의 국외 이전</h2>
@@ -119,8 +127,9 @@
           </thead>
           <tbody>
             <tr><td>Google (Firebase)</td><td>미국</td><td>Firebase UID, Firestore 데이터</td><td>서버 호스팅 및 데이터 저장</td></tr>
-            <tr><td>Suno</td><td>미국</td><td>생성 요청 데이터</td><td>AI 음악 생성</td></tr>
+            <tr><td>Suno</td><td>미국</td><td>생성 요청 데이터, 허밍 오디오</td><td>AI 음악 생성</td></tr>
             <tr><td>OpenAI</td><td>미국</td><td>채팅 메시지</td><td>대화 처리</td></tr>
+            <tr><td>SerpAPI</td><td>미국</td><td>검색 쿼리</td><td>차트·트렌드 검색</td></tr>
           </tbody>
         </table>
 
@@ -132,7 +141,7 @@
         </ol>
         <p>이용자가 앱을 삭제하면:</p>
         <ul>
-          <li>기기 내 로컬 데이터 (재생 기록, 설정, 생성된 음악 파일)는 즉시 삭제됩니다.</li>
+          <li>기기 내 로컬 데이터 (재생 기록, 설정, 생성된 음악 파일, 채팅 기록)는 즉시 삭제됩니다.</li>
           <li>서버 데이터 (Firestore)는 위 보유 기간에 따라 관리됩니다.</li>
         </ul>
 
@@ -198,10 +207,11 @@
           </thead>
           <tbody>
             <tr><td>2026-03-03</td><td>최초 작성</td></tr>
+            <tr><td>2026-03-07</td><td>구독 3단계(Starter/Basic/Creator) 반영, AI 에이전트 환경설정·허밍 오디오·채팅 메시지 수집 항목 추가, SerpAPI 위탁 업체 추가, 앱 삭제 시 채팅 기록 삭제 명시</td></tr>
           </tbody>
         </table>
 
-        <p><em>이 개인정보처리방침은 2026년 3월 3일부터 시행합니다.</em></p>
+        <p><em>이 개인정보처리방침은 2026년 3월 7일부터 시행합니다.</em></p>
 
         <a href="index.html" class="back-link">← 홈으로 돌아가기</a>
       </div>
