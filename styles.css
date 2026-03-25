@@ -554,9 +554,12 @@ a:hover {
   .container {
     padding: 0 var(--spacing-md);
   }
-  
+
   .features-grid {
     gap: var(--spacing-lg);
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
