@@ -280,8 +280,8 @@ a:hover {
 }
 
 .feature-icon {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 4.875rem;
+  height: 4.875rem;
   margin-bottom: var(--spacing-sm);
   display: block;
   color: var(--gradient-start);
