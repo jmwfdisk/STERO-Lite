@@ -557,7 +557,7 @@ a:hover {
 
   .features-grid {
     gap: var(--spacing-lg);
-    max-width: 50%;
+    max-width: 99%;
     margin-left: auto;
     margin-right: auto;
   }
