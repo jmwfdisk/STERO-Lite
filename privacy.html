@@ -83,6 +83,7 @@
             <tr><td>AI 이미지·영상 생성용 프롬프트와 참고 이미지</td><td>서버 전달</td><td>앨범아트·배경·영상 편집용 생성</td></tr>
             <tr><td>허밍 오디오, Lab·영상 편집기에 올린 오디오 파일</td><td>서버 임시 저장</td><td>AI 음악 생성, 보컬 분리, 커버·리믹스, 노이즈 제거, 자동 자막</td></tr>
             <tr><td>푸시 알림 토큰 (iOS)</td><td>서버 저장 (임시)</td><td>음악 생성 진행 알림</td></tr>
+            <tr><td>푸시 알림 토큰 (Android)</td><td>서버 저장 (Android, Google 로그인 시)</td><td>크레딧 지급 등 서비스 안내 알림</td></tr>
             <tr><td>리듬 게임 닉네임·전적·점수, 대기실 채팅</td><td>서버 저장</td><td>온라인 대결·순위표 제공</td></tr>
             <tr><td>생성한 곡 정보 (제목·가사·스타일·생성 설정·음원/앨범아트 주소·좋아요/싫어요)</td><td>서버 저장 (Android, Google 로그인 시)</td><td>기기 변경·재설치 시 라이브러리 복구</td></tr>
             <tr><td>플레이리스트 (이름·곡 목록)</td><td>서버 저장 (Android, Google 로그인 시)</td><td>기기 변경·재설치 시 플레이리스트 복구</td></tr>
@@ -145,7 +146,8 @@
             <tr><td>결제 거래 ID, 선물 코드 이력</td><td>거래일로부터 5년</td><td>대금 결제 및 재화 공급 기록 (전자상거래법)</td></tr>
             <tr><td>음악 생성 스타일 데이터</td><td>90일 후 자동 삭제</td><td>품질 분석</td></tr>
             <tr><td>허밍 오디오, Lab·편집기 업로드 오디오 파일</td><td>업로드 후 24시간 이내 자동 삭제</td><td>AI 처리</td></tr>
-            <tr><td>푸시 알림 토큰</td><td>생성 완료 시 삭제</td><td>알림 전송</td></tr>
+            <tr><td>푸시 알림 토큰 (iOS)</td><td>생성 완료 시 삭제</td><td>알림 전송</td></tr>
+            <tr><td>푸시 알림 토큰 (Android)</td><td>로그아웃 또는 계정 삭제 시까지</td><td>알림 전송</td></tr>
             <tr><td>리듬 게임 프로필·순위 기록</td><td>계정 삭제 시까지</td><td>온라인 대결·순위표</td></tr>
             <tr><td>생성한 곡 정보, 플레이리스트 (Android)</td><td>이용자가 삭제하거나 계정 삭제 시까지</td><td>계정 백업</td></tr>
             <tr><td>채팅 기록 (Android)</td><td>저장 후 7일 자동 삭제, 또는 계정 삭제 시</td><td>계정 백업</td></tr>
@@ -172,6 +174,7 @@
             <tr><td>Google (Firebase, Google Cloud)</td><td>인증(Google 로그인 포함), 데이터 저장, 파일 저장, 서버 운영</td><td>사용자 ID, Google 로그인 정보, 서비스 데이터 전반</td></tr>
             <tr><td>Apple (iOS)</td><td>인앱 결제, 푸시 알림, Sign in with Apple</td><td>결제 정보, 알림 토큰, 로그인 정보</td></tr>
             <tr><td>Google (Google Play 결제, Android)</td><td>인앱 결제</td><td>결제 정보 (주문 번호, 구매 토큰)</td></tr>
+            <tr><td>Google (Firebase Cloud Messaging, Android)</td><td>푸시 알림 전송</td><td>알림 토큰</td></tr>
             <tr><td>OpenAI</td><td>AI 대화, 텍스트·이미지 자동 검수, 이미지 생성, 자동 자막</td><td>채팅 내용, 첨부 사진, 검수 대상 텍스트·이미지(닉네임·댓글·공개 콘텐츠·프로필 사진), 생성 프롬프트, 자막용 오디오</td></tr>
             <tr><td>Suno API 제공업체 (sunoapi.org)</td><td>AI 음악·효과음 생성, 커버·리믹스, 음악생성 보컬 분리</td><td>생성 설정과 가사, 허밍·커버용 오디오</td></tr>
             <tr><td>Replicate</td><td>보컬 분리, 노이즈 제거, AI 영상 생성</td><td>처리 대상 오디오, 영상 생성 프롬프트와 시작·끝 이미지</td></tr>
