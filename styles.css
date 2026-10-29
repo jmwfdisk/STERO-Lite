@@ -128,7 +128,7 @@ a { color: inherit; }
 .mix-slider input::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--ch-l), var(--ch-r)); }
 .mix-slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%; background: var(--fg); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--line), 0 4px 12px rgba(0, 0, 0, .35); }
 .mix-slider input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--fg); border: 3px solid var(--bg); }
-.mixer .hint { margin: 0; }
+.mixer .hint { margin: 0; text-wrap: pretty; }
 /* 큰 화면: 체험 박스를 넓히고 두 단으로 (왼쪽 미터·슬라이더 / 오른쪽 설명·안내) */
 @media (min-width: 1024px) {
   .mixer {

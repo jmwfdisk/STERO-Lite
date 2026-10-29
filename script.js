@@ -105,7 +105,7 @@
   const cv = document.getElementById('wave'), g = cv.getContext('2d');
   const scope = document.getElementById('scope'), sg = scope.getContext('2d');
   const bufL = new Float32Array(1024), bufR = new Float32Array(1024);
-  let W = 0, H = 0, dpr = 1, p = 0, time = 0, colors = {}, energy = 0, lvlL = .25, lvlR = .25;
+  let lastT = performance.now(), W = 0, H = 0, dpr = 1, p = 0, time = 0, colors = {}, energy = 0, lvlL = .25, lvlR = .25;
   // CSS가 늦게 적용되면 토큰이 빈 문자열 → 기본값으로 그린다 (빈 색을 그라디언트에 넣으면 예외가 나서 루프가 멈춤)
   const FALLBACK = { l: '#ff6b35', r: '#a259f0', m: '#f3eef8' };
   function readColors() {
@@ -128,7 +128,7 @@
   function sample(buf, x, live) {
     if (live) return buf[Math.floor(x * (buf.length - 1))] * 2.2;
     // 부드럽게 흘러가는 물결 (Hero는 소리 모양 대신 이걸 쓰고, 소리는 높이·빛으로만 반영)
-    return Math.sin(x * 7 - time * 2.6) * .58 + Math.sin(x * 17 + time * 1.9) * .27 + Math.sin(x * 37 - time * 3.4) * .13;
+    return Math.sin(x * 7 - time * 6.5) * .58 + Math.sin(x * 17 + time * 4.6) * .27 + Math.sin(x * 37 - time * 8.5) * .13;
   }
   function env(from, x) { return from === 'l' ? 1 - x * .7 : from === 'r' ? .3 + x * .7 : 1; }
   function line(ctx, w, cy, amp, buf, live, color, from, phase) {
@@ -154,7 +154,9 @@
   function draw() {
     const live = A.on && A.anL;
     if (live) { A.anL.getFloatTimeDomainData(bufL); A.anR.getFloatTimeDomainData(bufR); }
-    time += .016;
+    // 실제 경과 시간 기준 (60Hz·120Hz 화면에서 같은 속도), 소리가 클수록 빨리 흐른다
+    const now = performance.now(), dt = Math.min(.05, (now - lastT) / 1000 || .016); lastT = now;
+    time += dt * (1 + energy * 1.2);
     const toW = v => Math.max(0, Math.min(1, (20 * Math.log10(v + 1e-6) + 60) / 60));
     const lv = live ? rms(bufL) : .12 + Math.abs(Math.sin(time * 2.3)) * .08;
     const rv = live ? rms(bufR) : .12 + Math.abs(Math.sin(time * 1.9 + 1)) * .08;
@@ -197,7 +199,7 @@
     // 3) 빛 입자: 파형을 따라 흐르다 합치면 가운데 선으로
     g.globalCompositeOperation = dark ? 'lighter' : 'source-over';
     for (const q of parts) {
-      q.x += q.v * (1 + energy * 3) * (q.ch ? -1 : 1);
+      q.x += q.v * dt * 60 * 2.2 * (1 + energy * 3) * (q.ch ? -1 : 1);
       if (q.x > 1) q.x -= 1; if (q.x < 0) q.x += 1;
       const lane = q.ch ? cy + gap : cy - gap;
       const buf = q.ch ? bufR : bufL;
