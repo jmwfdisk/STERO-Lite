@@ -6,13 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- SEO Meta Tags -->
-  <title>채널 합성 — STÉRO</title>
+  <title>채널 합성 웹 도구 — 두 음원을 좌우(L·R) 스테레오로 | STÉRO 스테로</title>
   <meta name="description" content="두 개의 음원을 왼쪽(L)과 오른쪽(R) 채널로 나눠 하나의 스테레오 파일로 합성하는 STÉRO 웹 도구. 파일은 서버로 전송되지 않고 브라우저 안에서만 처리됩니다.">
   <meta name="author" content="STÉRO">
   <meta name="theme-color" content="#0d0b12">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Twitter -->
+  <link rel="canonical" href="https://stero.co.kr/merge.html">
+  <meta property="og:site_name" content="STÉRO">
+  <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stero.co.kr/merge.html">
   <meta property="og:title" content="채널 합성 — STÉRO">
@@ -39,6 +42,20 @@
 
   <!-- Script -->
   <script src="merge.js" defer></script>
+
+  <!-- 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "STÉRO 채널 합성",
+    "url": "https://stero.co.kr/merge.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "웹 브라우저",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "description": "두 개의 음원을 왼쪽(L)과 오른쪽(R) 채널로 나눠 하나의 스테레오 WAV 파일로 합성하는 무료 웹 도구. 파일은 브라우저 안에서만 처리됩니다."
+  }
+  </script>
 </head>
 <body>
 
