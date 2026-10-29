@@ -1,0 +1,6 @@
+# GitHub Pages(Jekyll) 설정 — 저장소 내부 문서는 사이트에 공개하지 않는다
+exclude:
+  - CLAUDE.md
+  - README.md
+  - 개발일지.md
+  - .gitignore

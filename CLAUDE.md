@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 세션 시작·종료
+
+- 시작할 때 `개발일지.md` 맨 위 「▶ 다음 세션 시작 안내」를 먼저 읽는다 (현재 상태, 검증 도구, 사용자 할 일, 열린 과제, 주의)
+- 의미 있는 작업을 마치면 개발일지에 항목을 추가하고(최신이 위, "무엇을 / 왜 / 확인 / 남은 것") 시작 안내를 갱신한다. 시각은 쓰기 직전 `date "+%m-%d %H:%M"`로 확인
+- 내부 문서(`CLAUDE.md`·`README.md`·`개발일지.md`)는 `_config.yml`의 `exclude`로 사이트에 공개되지 않는다. 새 내부 문서를 만들면 여기에도 추가한다
+
 ## 프로젝트 개요
 
 STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시·테스트 중인 앱(STÉRO MUSIC iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
