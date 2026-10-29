@@ -78,6 +78,7 @@
   const sep = document.getElementById('sep'), sepVal = document.getElementById('sepVal');
   const heroSep = document.getElementById('heroSep'), heroSepVal = document.getElementById('heroSepVal');
   const mixer = document.getElementById('mixer');
+  const ctaPre = mixer.querySelector('.mix-cta .pre'), ctaPost = mixer.querySelector('.mix-cta .post');
   let mergeP = 0;
   function setMerge(v) {
     v = +v;
@@ -87,6 +88,8 @@
     sepVal.textContent = v == 100 ? '합성 100%' : v == 0 ? '분리 100%' : '합성 ' + v + '%';
     heroSepVal.textContent = v >= 100 ? '하나로 · 두 채널이 가운데에서 만나요' : v == 0 ? '분리 · L 패드 | R 아르페지오' : '합성 ' + v + '%';
     mixer.toggleAttribute('data-merged', v >= 95);
+    ctaPre.hidden = v >= 95;
+    ctaPost.hidden = v < 95;
     applyMix();
     if (reduce) frame();
   }

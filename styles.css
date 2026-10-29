@@ -113,8 +113,6 @@ a { color: inherit; }
   padding: 12px 14px; border-radius: 12px; text-decoration: none; font-size: 14px; color: var(--muted);
   border: 1px dashed var(--line); transition: background .4s var(--ease-in), color .4s, border-color .4s;
 }
-.mix-cta .post, .mixer[data-merged] .mix-cta .pre { display: none; }
-.mixer[data-merged] .mix-cta .post { display: inline; }
 .mix-cta b { display: inline-block; color: var(--fg); white-space: nowrap; }
 .mix-cta:hover { border-color: var(--muted); color: var(--fg); }
 .mixer[data-merged] .mix-cta {
