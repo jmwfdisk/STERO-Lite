@@ -2,38 +2,42 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
   <!-- SEO Meta Tags -->
-  <title>STÉRO Lite - Your Personal Stereo Experience</title>
-  <meta name="description" content="STÉRO Lite는 개인 맞춤형 스테레오 음악 경험을 제공하는 iOS 앱입니다. 음악 플레이어, 플레이리스트 관리, 스테레오 채널 합성 기능을 제공합니다.">
-  <meta name="author" content="STÉRO Lite">
-  
+  <title>STÉRO — Two channels. One sound.</title>
+  <meta name="description" content="STÉRO는 듣고, 섞고, 말로 만드는 음악 앱 시리즈입니다. iPhone·iPad용 STÉRO MUSIC, Android용 STÉRO Lite, 웹 STÉRO Studio에서 AI 음악 생성, 실시간 가사, Live Wire를 만나 보세요.">
+  <meta name="author" content="STÉRO">
+  <meta name="theme-color" content="#0d0b12">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sterolite.app/">
-  <meta property="og:title" content="STÉRO Lite - Your Personal Stereo Experience">
-  <meta property="og:description" content="STÉRO Lite는 개인 맞춤형 스테레오 음악 경험을 제공하는 iOS 앱입니다.">
-  <meta property="og:image" content="https://sterolite.app/assets/images/Play.jpg">
-  
+  <meta property="og:url" content="https://stero.co.kr/">
+  <meta property="og:title" content="STÉRO — 음악 앱 시리즈">
+  <meta property="og:description" content="STÉRO는 듣고, 섞고, 말로 만드는 음악 앱 시리즈입니다. iPhone·iPad용 STÉRO MUSIC, Android용 STÉRO Lite, 웹 STÉRO Studio에서 AI 음악 생성, 실시간 가사, Live Wire를 만나 보세요.">
+  <meta property="og:image" content="https://stero.co.kr/assets/images/Play.jpg">
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://sterolite.app/">
-  <meta property="twitter:title" content="STÉRO Lite - Your Personal Stereo Experience">
-  <meta property="twitter:description" content="STÉRO Lite는 개인 맞춤형 스테레오 음악 경험을 제공하는 iOS 앱입니다.">
-  <meta property="twitter:image" content="https://sterolite.app/assets/images/Play.jpg">
-  
+  <meta property="twitter:url" content="https://stero.co.kr/">
+  <meta property="twitter:title" content="STÉRO — 음악 앱 시리즈">
+  <meta property="twitter:description" content="STÉRO는 듣고, 섞고, 말로 만드는 음악 앱 시리즈입니다. iPhone·iPad용 STÉRO MUSIC, Android용 STÉRO Lite, 웹 STÉRO Studio에서 AI 음악 생성, 실시간 가사, Live Wire를 만나 보세요.">
+  <meta property="twitter:image" content="https://stero.co.kr/assets/images/Play.jpg">
+
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon_io/favicon-16x16.png">
   <link rel="icon" href="assets/images/favicon_io/favicon.ico">
   <link rel="manifest" href="assets/images/favicon_io/site.webmanifest">
-  
-  <!-- Stylesheet -->
+
+  <!-- Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="styles.css">
-  
+
   <!-- Script -->
   <script src="script.js" defer></script>
 
@@ -41,139 +45,503 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "STÉRO",
+    "url": "https://stero.co.kr/",
+    "email": "gomgomgirls@naver.com",
+    "sameAs": ["https://www.instagram.com/stero_lite/"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "STÉRO Lite",
-    "operatingSystem": "iOS",
+    "name": "STÉRO MUSIC",
+    "operatingSystem": "iOS, iPadOS",
     "applicationCategory": "MusicApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "downloadUrl": "https://apps.apple.com/us/app/stero-lite/id6758091280",
-    "description": "STÉRO Lite는 개인 맞춤형 스테레오 음악 경험을 제공하는 iOS 앱입니다. 음악 플레이어, 플레이리스트 관리, 스테레오 채널 합성 기능을 제공합니다."
+    "description": "말이나 사진으로 곡을 만들고, 실시간 가사와 리듬 게임, Live Wire로 함께 즐기는 AI 음악 앱"
   }
   </script>
 </head>
 <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <img src="assets/images/bgh.png" alt="" role="presentation" class="iphone-background" />
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-title">
-          <img src="assets/images/appicon.png" alt="STÉRO Lite App Icon" class="app-icon" />
-          <h1>STÉRO Lite</h1>
-        </div>
-        <p class="slogan">Your personal stereo experience</p>
-        <a href="https://apps.apple.com/us/app/stero-lite/id6758091280" class="app-store-badge" target="_blank" rel="noopener noreferrer" aria-label="App Store에서 다운로드 (새 탭에서 열림)">
-          Available on the App Store
-        </a>
-      </div>
-      <div class="iphone-mockup-wrapper">
-        <div class="iphone-mockup" aria-label="iPhone mockup">
-          <img src="assets/images/1.png" alt="STÉRO Lite iPhone mockup" />
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Features Section -->
-  <section class="features">
-    <div class="container">
-      <h2>Features</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <img src="assets/images/musicgen.png" alt="AI 음악생성 아이콘" class="feature-icon feature-icon-lg" loading="lazy" />
-          <h3>AI 음악 생성</h3>
-          <p>텍스트나 허밍으로 나만의 음악을 AI로 생성하고, 라이브러리에서 관리·다운로드하세요.</p>
-        </div>
-        <div class="feature-card">
-          <img src="assets/images/music.png" alt="음악 아이콘" class="feature-icon" loading="lazy" />
-          <h3>음악 플레이어</h3>
-          <p>직관적이고 아름다운 인터페이스로 음악을 감상하세요. 모든 기능이 손끝에서 바로 사용 가능합니다.</p>
-        </div>
-        <div class="feature-card">
-          <img src="assets/images/list.png" alt="플레이리스트 아이콘" class="feature-icon" loading="lazy" />
-          <h3>플레이리스트 관리</h3>
-          <p>원하는 곡들을 자유롭게 모아 나만의 플레이리스트를 만들고 관리하세요.</p>
-        </div>
-        <div class="feature-card">
-          <img src="assets/images/streo.png" alt="Lab 아이콘" class="feature-icon" loading="lazy" />
-          <h3>Lab 도구</h3>
-          <p>보컬 분리, 채널 합성, 영상 오디오 추출 등 다양한 AI 오디오 도구를 실험해보세요.</p>
-        </div>
-        <div class="feature-card">
-          <img src="assets/images/bg.png" alt="테마 아이콘" class="feature-icon" loading="lazy" />
-          <h3>테마 & 가사 커스터마이징</h3>
-          <p>다양한 테마와 가사 표시 옵션으로 앱을 나만의 스타일로 꾸며보세요.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="STÉRO 처음으로"><i aria-hidden="true"><b></b><b></b></i>STÉRO</a>
+    <nav aria-label="시리즈">
+      <a href="#music">Music</a><a href="#lite">Lite</a><a href="#studio">Studio</a><a href="#lab">Lab</a><a href="merge.html">채널 합성</a><a class="ig" href="https://www.instagram.com/stero_lite/" target="_blank" rel="noopener"><i aria-hidden="true"></i>Instagram</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- Screenshots Section -->
-  <section class="screenshots">
-    <div class="container">
-      <h2>App Screenshots</h2>
-      <div class="screenshots-wrapper">
-        <div class="screenshots-carousel" id="screenshotsCarousel">
-          <div class="screenshot-item" aria-label="Screenshot 1">
-            <img src="assets/images/11.png" alt="STÉRO Lite Screenshot 1" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 2">
-            <img src="assets/images/12.png" alt="STÉRO Lite Screenshot 2" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 3">
-            <img src="assets/images/13.png" alt="STÉRO Lite Screenshot 3" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 4">
-            <img src="assets/images/14.png" alt="STÉRO Lite Screenshot 4" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 5">
-            <img src="assets/images/15.png" alt="STÉRO Lite Screenshot 5" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 6">
-            <img src="assets/images/2.png" alt="STÉRO Lite Screenshot 6" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 7">
-            <img src="assets/images/4.png" alt="STÉRO Lite Screenshot 7" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 8">
-            <img src="assets/images/5.png" alt="STÉRO Lite Screenshot 8" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 9">
-            <img src="assets/images/6.png" alt="STÉRO Lite Screenshot 9" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 10">
-            <img src="assets/images/7.png" alt="STÉRO Lite Screenshot 10" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 11">
-            <img src="assets/images/8.png" alt="STÉRO Lite Screenshot 11" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 12">
-            <img src="assets/images/9.png" alt="STÉRO Lite Screenshot 12" loading="lazy" />
-          </div>
-          <div class="screenshot-item" aria-label="Screenshot 13">
-            <img src="assets/images/10.png" alt="STÉRO Lite Screenshot 13" loading="lazy" />
-          </div>
-        </div>
-      </div>
+<div class="hero" id="top">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="mono">STÉRO Series · 2026</p>
+    <h1><span class="l">Two channels.</span><span>One sound.</span></h1>
+    <p class="sub">듣고, 섞고, 말로 만드는 음악 앱 시리즈. 아이폰과 아이패드, 안드로이드, 웹에서 같은 STÉRO를 만나요.</p>
+    <div class="actions">
+      <button class="btn primary" id="sound" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">소리 켜기</span></button>
+      <a class="btn" href="#series">시리즈 보기</a>
     </div>
-  </section>
+    <div class="meters" aria-hidden="true">
+      <div class="meter l"><span class="mono l">L</span><div class="bar"><i id="mL"></i></div></div>
+      <div class="meter r"><span class="mono r">R</span><div class="bar"><i id="mR"></i></div></div>
+      <div class="scale"><span>-60</span><span>-40</span><span>-24</span><span>-12</span><span>-6</span><span>0 dB</span></div>
+    </div>
+    <p class="hint">스크롤하면 두 채널이 가운데로 모여요. 소리를 켠 뒤 마우스를 좌우로 움직이면 L·R 밸런스가 바뀝니다.</p>
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="terms.html">이용약관</a>
-          <a href="privacy.html">개인정보처리방침</a>
-          <a href="mailto:gomgomgirls@naver.com">Contact</a>
-        </div>
-        <p class="footer-copyright">© 2026 STÉRO Lite. All rights reserved.</p>
+<section id="series">
+  <div class="wrap">
+    <div class="head">
+      <p class="mono">Tracklist</p>
+      <h2>한 장의 앨범, 여섯 개의 트랙</h2>
+      <p>출시한 앱은 A면, 만들고 있는 앱은 B면에 담았어요.</p>
+    </div>
+
+    <div class="side">
+      <div class="side-label"><span class="mono">Side A · 출시 · 테스트 중</span><span class="mono">3 tracks</span></div>
+      <ol class="tracks">
+        <li class="track"><a href="#music">
+          <span class="no">A1</span><img src="assets/images/site/icon-music.webp" alt="">
+          <span><span class="name">STÉRO MUSIC</span><span class="meta" style="display:block">iPhone · iPad · AI 음악 생성, 사진으로 음악, 리듬 게임, Live Wire</span></span>
+          <span class="ver"><span class="status live">App Store</span>v2.1.1</span></a></li>
+        <li class="track"><a href="#lite">
+          <span class="no">A2</span><img src="assets/images/site/icon-lite.webp" alt="">
+          <span><span class="name">STÉRO Lite</span><span class="meta" style="display:block">Android · 음악 채팅, 라이브러리, 보관함</span></span>
+          <span class="ver"><span class="status live">비공개 테스트</span>v2.1</span></a></li>
+        <li class="track"><a href="#studio">
+          <span class="no">A3</span><img src="assets/images/site/icon-studio.webp" alt="">
+          <span><span class="name">STÉRO Studio</span><span class="meta" style="display:block">Web · 곰곰디스크 안의 AI 음악 생성</span></span>
+          <span class="ver"><span class="status dev">소개</span>곰곰디스크</span></a></li>
+      </ol>
+    </div>
+
+    <div class="side b">
+      <div class="side-label"><span class="mono">Side B · 만들고 있어요</span><span class="mono">3 tracks</span></div>
+      <ol class="tracks">
+        <li class="track"><a href="#lab">
+          <span class="no">B1</span><img src="assets/images/site/icon-chat.webp" alt="">
+          <span><span class="name">STÉRO Chat</span><span class="meta" style="display:block">iOS · Android · 같은 노래를 같은 순간에 같이 듣는 채팅</span></span>
+          <span class="ver"><span class="status dev">개발 중</span>v0.3</span></a></li>
+        <li class="track"><a href="#lab">
+          <span class="no">B2</span><img src="assets/images/site/icon-cut.webp" alt="">
+          <span><span class="name">STÉRO Cut</span><span class="meta" style="display:block">iPad · Mac · 영상 플레이어와 AI 영상 편집</span></span>
+          <span class="ver"><span class="status dev">개발 중</span>—</span></a></li>
+        <li class="track"><a href="#lab">
+          <span class="no">B3</span><span class="ph-icon">3D</span>
+          <span><span class="name">STÉRO 3D</span><span class="meta" style="display:block">글과 이미지로 3D 모델 만들기</span></span>
+          <span class="ver"><span class="status dev">기획</span>—</span></a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap chat-grid">
+    <div class="head" style="margin:0">
+      <p class="mono">STÉRO AI · 세 플랫폼 공통</p>
+      <h2>말하면, 곡이 됩니다</h2>
+      <p>원하는 분위기를 채팅으로 말하면 STÉRO가 곡 설계서를 먼저 보여 줘요. 확인하면 두 곡을 만들어 라이브러리에 담습니다. 아이폰, 안드로이드, 웹이 같은 엔진을 씁니다.</p>
+      <div class="platforms"><span class="chip">iPhone · iPad</span><span class="chip">Android</span><span class="chip">Web</span></div>
+    </div>
+    <div class="chat" aria-label="AI 음악 생성 대화 예시">
+      <p class="msg me">비 오는 밤에 창가에서 듣는 잔잔한 로파이 만들어줘</p>
+      <div class="msg ai"><span class="who">STÉRO</span>이런 곡은 어때요?
+        <p class="spec"><b>장르</b> lo-fi hip hop · <b>BPM</b> 72 · <b>키</b> F major<br><b>악기</b> 로즈 피아노, 빗소리, 테이프 노이즈<br><b>보컬</b> 없음 · <b>길이</b> 약 2:40</p></div>
+      <p class="msg me">좋아, 만들어줘</p>
+      <div class="song">
+        <span class="art" aria-hidden="true"></span>
+        <span><span class="t" style="display:block">창가의 빗소리</span><span class="s">lo-fi · 72 BPM · 2:38</span></span>
+        <button class="round" id="songPlay" type="button" aria-pressed="false" aria-label="예시 곡 재생"><span class="ico"></span></button>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<section id="music">
+  <div class="wrap">
+    <div class="prod-head">
+      <img src="assets/images/site/icon-music.webp" alt="STÉRO MUSIC 앱 아이콘">
+      <div><p class="mono">A1 · iPhone · iPad</p><h2>STÉRO MUSIC</h2></div>
+      <a class="btn primary" href="https://apps.apple.com/us/app/stero-lite/id6758091280" target="_blank" rel="noopener">App Store에서 받기</a>
+      <p class="note">말이나 사진으로 곡을 만들고, 가사를 따라 부르고, 리듬 게임과 Live Wire로 함께 즐기는 STÉRO의 대표 앱이에요. 한국어 · English · 日本語.</p>
+    </div>
+    <div class="story">
+      <div class="phone-col">
+        <div class="phone"><div class="screen" id="screen">
+          <img src="assets/images/site/m-gen.webp" alt="" class="on" data-k="gen">
+          <img src="assets/images/site/m-photo.webp" alt="" data-k="photo">
+          <img src="assets/images/site/m-library.webp" alt="" data-k="library">
+          <img src="assets/images/site/m-lyrics.webp" alt="" data-k="lyrics">
+          <img src="assets/images/site/ios-2.webp" alt="" data-k="player">
+          <img src="assets/images/site/ios-9.webp" alt="" data-k="merge">
+          <img src="assets/images/site/m-rhythm.webp" alt="" data-k="rhythm">
+          <img src="assets/images/site/m-lab.webp" alt="" data-k="lab">
+          <img src="assets/images/site/m-lang.webp" alt="" data-k="lang">
+        </div></div>
+        <div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <ol class="steps">
+        <li class="step on" data-k="gen">
+          <p class="mono">01 · AI 음악 생성</p>
+          <h3>말로 만드는 나만의 곡</h3>
+          <p>음악 생성 탭에서 원하는 분위기를 채팅으로 말하세요. STÉRO가 장르, 템포, 악기, 가사 방향을 담은 설계서를 먼저 보여 주고, 확인하면 두 곡을 만들어요. 허밍을 녹음해 시작할 수도 있어요.</p>
+          <div class="chips"><span class="chip">V6 · V6 Wild · V6 Mini</span><span class="chip">허밍으로 시작</span><span class="chip">다른 버전 비교</span></div>
+          <img class="inline" src="assets/images/site/m-gen.webp" alt="AI 음악 생성 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="photo">
+          <p class="mono">02 · 사진으로 음악</p>
+          <h3>사진 한 장의 분위기를 곡으로</h3>
+          <p>입력창의 +로 사진을 올리면 STÉRO가 장면의 분위기를 읽고 그에 맞는 곡을 설계해요. 오늘 찍은 사진이 그대로 한 곡이 됩니다.</p>
+          <div class="chips"><span class="chip">사진 첨부</span><span class="chip">분위기 분석</span></div>
+          <img class="inline" src="assets/images/site/m-photo.webp" alt="사진으로 음악 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="library">
+          <p class="mono">03 · 라이브러리</p>
+          <h3>만든 곡을 한 책장에</h3>
+          <p>좋아요와 싫어요로 고르고, 검색과 필터로 찾아요. 곡 제목 옆에서 가사를 바로 보고, 마음에 드는 곡은 선물 코드로 친구에게 보낼 수 있어요.</p>
+          <div class="chips"><span class="chip">좋아요 · 싫어요</span><span class="chip">가사 보기</span><span class="chip">선물 코드</span></div>
+          <img class="inline" src="assets/images/site/m-library.webp" alt="라이브러리 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="lyrics">
+          <p class="mono">04 · 실시간 가사</p>
+          <h3>흐르는 가사를 따라 부르기</h3>
+          <p>재생 중인 위치에 맞춰 가사가 한 줄씩 떠올라요. 글꼴 크기와 색, 효과를 내 취향대로 바꿀 수 있어요.</p>
+          <div class="chips"><span class="chip">가사 싱크</span><span class="chip">글꼴 · 색 설정</span></div>
+          <img class="inline" src="assets/images/site/m-lyrics.webp" alt="실시간 가사 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="player">
+          <p class="mono">05 · 플레이어 · 테마</p>
+          <h3>내 음악 파일을 바로 재생</h3>
+          <p>파일 앱에서 곡을 불러오면 플레이리스트로 정리돼요. 10밴드 EQ와 재생 속도를 조절하고, 컬러 테마와 아트 테마로 배경을 바꿔요. 화면 가장자리를 밀면 어느 탭에서나 미니 플레이어가 열려요.</p>
+          <div class="chips"><span class="chip">10밴드 EQ</span><span class="chip">재생 속도</span><span class="chip">컬러 · 아트 테마</span><span class="chip">엣지 미니 플레이어</span></div>
+          <img class="inline" src="assets/images/site/ios-2.webp" alt="플레이어 · 테마 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="merge">
+          <p class="mono">06 · 채널 합성</p>
+          <h3>두 곡을 L과 R로 나눠 하나로</h3>
+          <p>한 곡은 왼쪽, 다른 곡은 오른쪽 채널에 놓고 섞어요. 아래에서 직접 들어 보세요.</p>
+          <div class="merge">
+            <label for="sep"><span><b class="l">L</b> 패드 · <b class="r">R</b> 아르페지오</span><span id="sepVal" class="mono">분리 100%</span></label>
+            <input type="range" id="sep" min="0" max="100" value="0" aria-describedby="sepVal">
+            <canvas id="scope" aria-hidden="true"></canvas>
+            <button class="btn" id="sound2" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">소리 켜기</span></button>
+          </div>
+          <a class="btn primary merge-cta" href="merge.html">내 음원으로 웹에서 합성하기 →</a>
+          <img class="inline" src="assets/images/site/ios-9.webp" alt="채널 합성 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="rhythm">
+          <p class="mono">07 · 리듬 게임</p>
+          <h3>내가 만든 곡으로 리듬 대결</h3>
+          <p>만든 곡이 그대로 리듬 게임 악보가 돼요. 글로벌 랭킹에서 친구와 점수를 겨뤄 보세요.</p>
+          <div class="chips"><span class="chip">내 곡으로 플레이</span><span class="chip">글로벌 랭킹</span></div>
+          <img class="inline" src="assets/images/site/m-rhythm.webp" alt="리듬 게임 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="lab">
+          <p class="mono">08 · Lab</p>
+          <h3>새 도구를 먼저 써 보기</h3>
+          <p>Lab에는 Live Wire ShortCut 영상 편집기, AI 배경 생성처럼 새로 만든 도구가 먼저 들어와요. Lab 크레딧은 구독에 포함돼요.</p>
+          <div class="chips"><span class="chip">ShortCut</span><span class="chip">AI 배경</span><span class="chip">Starter 3 · Basic 8 · Creator 20회/월</span></div>
+          <img class="inline" src="assets/images/site/m-lab.webp" alt="Lab 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="lang">
+          <p class="mono">09 · 다국어</p>
+          <h3>한국어, 영어, 일본어로</h3>
+          <p>앱 화면과 STÉRO와의 대화를 한국어, 영어, 일본어로 쓸 수 있어요.</p>
+          <div class="chips"><span class="chip">한국어</span><span class="chip">English</span><span class="chip">日本語</span></div>
+          <img class="inline" src="assets/images/site/m-lang.webp" alt="다국어 화면" loading="lazy">
+        </li>
+      </ol>
+    </div>
+
+    <div class="more">
+      <div class="beta-head">
+        <p class="mono">iPad</p>
+        <h3>아이패드에서는 더 넓게</h3>
+        <p>가로 화면에 맞춘 레이아웃으로 채팅과 가사, 플레이어를 한눈에 봐요.</p>
+      </div>
+      <div class="pads">
+        <figure><img src="assets/images/site/pad-gen.webp" alt="아이패드 음악 생성 화면" loading="lazy"><figcaption>음악 생성</figcaption></figure>
+        <figure><img src="assets/images/site/pad-lyrics.webp" alt="아이패드 실시간 가사 화면" loading="lazy"><figcaption>실시간 가사</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="more">
+      <div class="beta-head">
+        <p class="mono">사용 예시 · 친구 생일 선물</p>
+        <h3>세상에 하나뿐인 생일 노래 만들기</h3>
+        <p>기분을 한 줄 적는 것부터 사진으로 분위기 더하기, 가사 확인, 다 같이 따라 부르기, 리듬 대결, 다운로드까지. 실제 앱 화면으로 따라가 보세요.</p>
+        <p class="hint">새 카드는 <a href="https://www.instagram.com/stero_lite/" target="_blank" rel="noopener">인스타그램 @stero_lite</a>에 먼저 올라와요.</p>
+        <div class="cards-nav"><button type="button" id="cPrev" aria-label="이전 카드">←</button><button type="button" id="cNext" aria-label="다음 카드">→</button></div>
+      </div>
+      <div class="cards" id="cards" tabindex="0" aria-label="생일 노래 만들기 단계별 카드">
+        <figure><img src="assets/images/site/card-1.webp" alt="표지: 친구 생일, 세상에 하나뿐인 선물" loading="lazy"><figcaption>표지</figcaption></figure>
+        <figure><img src="assets/images/site/card-2.webp" alt="1단계: 기분을 한 줄 적으면 음악이 시작돼요" loading="lazy"><figcaption>1 · 음악 생성</figcaption></figure>
+        <figure><img src="assets/images/site/card-3.webp" alt="2단계: 오늘 찍은 사진으로도 음악이 완성돼요" loading="lazy"><figcaption>2 · 사진으로 음악</figcaption></figure>
+        <figure><img src="assets/images/site/card-4.webp" alt="3단계: 가사까지 AI가 알아서" loading="lazy"><figcaption>3 · 가사 미리보기</figcaption></figure>
+        <figure><img src="assets/images/site/card-5.webp" alt="4단계: 흐르는 가사 보며 다 같이 떼창" loading="lazy"><figcaption>4 · 실시간 가사</figcaption></figure>
+        <figure><img src="assets/images/site/card-6.webp" alt="5단계: 내가 만든 곡으로 친구들과 리듬 대결" loading="lazy"><figcaption>5 · 리듬 게임</figcaption></figure>
+        <figure><img src="assets/images/site/card-7.webp" alt="6단계: 오늘의 추억, 음악으로 차곡차곡" loading="lazy"><figcaption>6 · 라이브러리</figcaption></figure>
+        <figure><img src="assets/images/site/card-8.webp" alt="지금 만들어 볼까요? App Store에서 STÉRO 검색" loading="lazy"><figcaption>시작하기</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="beta">
+      <div class="beta-head">
+        <p class="mono">New in 2.1 · BETA</p>
+        <h3>만들고, 꾸미고, 공개하세요</h3>
+        <p>만든 곡을 Live Wire에 공개하고, 그 곡으로 세로 영상까지 만들 수 있어요.</p>
+        <div class="models"><span class="mono">음악 모델</span><span class="chip">V6</span><span class="chip">V6 Wild</span><span class="chip">V6 Mini</span></div>
+      </div>
+      <div class="beta-grid">
+        <article class="card">
+          <div class="stage">
+            <span class="chip kind">실제 화면</span>
+            <div class="pair">
+              <figure class="shot"><span class="bezel"><img src="assets/images/site/ios-livewire.webp" alt="Live Wire 피드: 장르 칩과 공개된 곡 썸네일 그리드" loading="lazy"></span><figcaption>Live Wire</figcaption></figure>
+              <figure class="shot"><span class="bezel"><img src="assets/images/site/ios-chart.webp" alt="인기차트 TOP100 목록" loading="lazy"></span><figcaption>인기차트</figcaption></figure>
+            </div>
+          </div>
+          <h3><span class="ttl">Live Wire · 인기차트</span><span class="status is-beta">BETA</span></h3>
+          <p>만든 곡을 배경과 30초 하이라이트로 공개하고, 다른 사람의 곡을 쇼츠처럼 위아래로 넘겨 들어요.</p>
+          <ul class="tags"><li>주간 · 월간 · TOP100</li><li>좋아요 · 댓글</li><li>AI 이미지·영상 배경</li><li>장르 칩 13종</li></ul>
+        </article>
+        <article class="card">
+          <div class="stage">
+            <span class="chip kind">실제 화면</span>
+            <div class="pair">
+              <figure class="shot"><span class="bezel"><img src="assets/images/site/ios-shortcut-home.webp" alt="Live Wire ShortCut 시작 화면: 채팅으로 만들기, 음악으로 시작, 내 프로젝트" loading="lazy"></span><figcaption>시작 화면</figcaption></figure>
+              <figure class="shot"><span class="bezel"><img src="assets/images/site/ios-shortcut-editor.webp" alt="Live Wire ShortCut 편집기: 9:16 미리보기와 V1·A1·자막 타임라인" loading="lazy"></span><figcaption>편집기</figcaption></figure>
+            </div>
+          </div>
+          <h3><span class="ttl">Live Wire ShortCut</span><span class="status is-beta">BETA</span></h3>
+          <p>9:16 세로 영상 편집기. 곡을 먼저 고르고 그 위에 영상을 얹어요. 한 줄만 적으면 자동 제작이 스토리보드부터 장면, 음악, 자막까지 만들어 줘요.</p>
+          <ul class="tags"><li>영상·이미지 3트랙 + 오디오 3트랙</li><li>AI 영상·이미지·음악·효과음·자막</li><li>필터 · 효과 · 켄번즈</li><li>장면 전환</li><li>AI 노이즈 제거</li><li>배경 제거</li></ul>
+        </article>
+      </div>
+      <p class="hint">BETA 기능은 사용 중 일부 오류가 있을 수 있어요.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lite">
+  <div class="wrap">
+    <div class="prod-head">
+      <img src="assets/images/site/icon-lite.webp" alt="STÉRO Lite 앱 아이콘">
+      <div><p class="mono">A2 · Android</p><h2>STÉRO Lite</h2></div>
+      <span class="btn" aria-disabled="true"><span class="status live">비공개 테스트 중</span>정식 출시 준비 중</span>
+      <p class="note">STÉRO의 AI 음악 채팅과 라이브러리를 안드로이드에 맞게 새로 만든 앱이에요. 지금은 Google Play 비공개 테스트 중이고, 아래는 실기기(갤럭시) 화면이에요.</p>
+    </div>
+    <div class="story lite">
+      <div class="phone-col">
+        <div class="phone"><div class="screen">
+          <img src="assets/images/site/lite-chat.webp" alt="" class="on" data-k="l-chat">
+          <img src="assets/images/site/lite-approval.webp" alt="" data-k="l-approval">
+          <img src="assets/images/site/lite-progress.webp" alt="" data-k="l-progress">
+          <img src="assets/images/site/lite-done.webp" alt="" data-k="l-done">
+          <img src="assets/images/site/lite-library.webp" alt="" data-k="l-library">
+          <img src="assets/images/site/lite-lyrics.webp" alt="" data-k="l-lyrics">
+          <img src="assets/images/site/lite-menu.webp" alt="" data-k="l-menu">
+          <img src="assets/images/site/lite-archive.webp" alt="" data-k="l-archive">
+          <img src="assets/images/site/lite-settings.webp" alt="" data-k="l-settings">
+        </div></div>
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <ol class="steps">
+        <li class="step on" data-k="l-chat">
+          <p class="mono">01 · 음악 채팅</p>
+          <h3>말하면 STÉRO가 곡을 설계해요</h3>
+          <p>음악채팅 탭에서 만들고 싶은 곡을 편하게 말하세요. 채팅은 무료이고, 곡을 만들 때만 크레딧이 쓰여요.</p>
+          <div class="chips"><span class="chip">채팅 무료</span><span class="chip">1곡 생성 = 1크레딧</span><span class="chip">V6 · Wild · Mini</span></div>
+          <img class="inline" src="assets/images/site/lite-chat.webp" alt="음악 채팅 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-approval">
+          <p class="mono">02 · 설계서 확인</p>
+          <h3>만들기 전에 먼저 확인</h3>
+          <p>STÉRO가 제목, 장르, 분위기를 담은 설계서를 보여 줘요. 가사를 추가하거나 악기만으로 바꿀 수 있고, 다른 버전도 비교해 볼 수 있어요.</p>
+          <div class="chips"><span class="chip">가사 추가</span><span class="chip">악기만</span><span class="chip">다른 버전 보기</span></div>
+          <img class="inline" src="assets/images/site/lite-approval.webp" alt="설계서 확인 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-progress">
+          <p class="mono">03 · 생성 진행</p>
+          <h3>지금 어디까지 왔는지 한눈에</h3>
+          <p>요청 접수부터 가사·구성 준비, 첫 번째 곡, 두 번째 곡, 기기 저장까지 단계별로 보여 줘요. 완성되면 자동으로 기기에 저장돼요.</p>
+          <div class="chips"><span class="chip">단계별 표시</span><span class="chip">자동 저장</span></div>
+          <img class="inline" src="assets/images/site/lite-progress.webp" alt="생성 진행 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-done">
+          <p class="mono">04 · 완성</p>
+          <h3>한 번에 두 곡</h3>
+          <p>완성된 두 곡을 채팅에서 바로 들어 보세요. 마음에 드는 쪽을 골라 라이브러리에서 관리해요.</p>
+          <div class="chips"><span class="chip">두 곡 생성</span><span class="chip">바로 재생</span></div>
+          <img class="inline" src="assets/images/site/lite-done.webp" alt="완성 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-library">
+          <p class="mono">05 · 라이브러리</p>
+          <h3>만든 곡을 한 곳에</h3>
+          <p>좋아요와 싫어요로 고르고 최신순으로 정리돼요. 원본 음원은 2주 동안 보관되고, 기기 음악 폴더(Music/STÉRO Lite)에 저장한 곡은 앱을 지워도 남아요.</p>
+          <div class="chips"><span class="chip">좋아요 · 싫어요</span><span class="chip">기기 저장</span><span class="chip">2주 보관</span></div>
+          <img class="inline" src="assets/images/site/lite-library.webp" alt="라이브러리 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-lyrics">
+          <p class="mono">06 · 가사 보기</p>
+          <h3>가사를 바로 확인하고 복사</h3>
+          <p>곡 줄의 가사보기를 누르면 구간별 가사가 열려요. 복사 버튼으로 그대로 가져갈 수 있어요.</p>
+          <div class="chips"><span class="chip">구간별 가사</span><span class="chip">복사</span></div>
+          <img class="inline" src="assets/images/site/lite-lyrics.webp" alt="가사 보기 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-menu">
+          <p class="mono">07 · 길게 누르기</p>
+          <h3>곡 하나로 할 수 있는 모든 것</h3>
+          <p>곡을 길게 누르면 메뉴가 열려요. 마음에 안 드는 구간만 다시 만드는 구간 편곡, 플레이리스트 추가, 공유, WAV 내보내기, 앨범아트 바꾸기까지.</p>
+          <div class="chips"><span class="chip">구간 편곡</span><span class="chip">MP3 공유</span><span class="chip">WAV 내보내기</span><span class="chip">앨범아트 바꾸기</span></div>
+          <img class="inline" src="assets/images/site/lite-menu.webp" alt="길게 누르기 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-archive">
+          <p class="mono">08 · 보관함</p>
+          <h3>플레이리스트와 자주 듣는 음악</h3>
+          <p>최근 생성한 곡을 바로 재생하고, 내 플레이리스트를 만들고, 최근 30일 동안 자주 들은 곡을 모아 봐요.</p>
+          <div class="chips"><span class="chip">플레이리스트</span><span class="chip">자주 듣는 음악</span></div>
+          <img class="inline" src="assets/images/site/lite-archive.webp" alt="보관함 화면" loading="lazy">
+        </li>
+        <li class="step" data-k="l-settings">
+          <p class="mono">09 · 설정</p>
+          <h3>내 방식대로</h3>
+          <p>STÉRO AI 대화 언어, 앱을 닫아도 계속 재생, 생성한 음악 자동 저장을 고를 수 있어요. Google 계정으로 로그인하면 곡과 채팅이 백업돼요.</p>
+          <div class="chips"><span class="chip">AI 대화 언어</span><span class="chip">백그라운드 재생</span><span class="chip">Google 백업</span></div>
+          <img class="inline" src="assets/images/site/lite-settings.webp" alt="설정 화면" loading="lazy">
+        </li>
+      </ol>
+    </div>
+    <div class="more">
+      <div class="beta-head">
+        <p class="mono">테마</p>
+        <h3>밝게, 또는 어둡게</h3>
+        <p>메도랜드 그린 같은 밝은 테마와 어두운 테마를 고를 수 있고, 기기 설정을 따라가게 둘 수도 있어요. 위 화면은 실기기, 아래는 어두운 테마예요.</p>
+      </div>
+      <div class="dark-pair">
+        <figure><img src="assets/images/site/and-1_chat_dark.webp" alt="어두운 테마 음악채팅 화면" loading="lazy"><figcaption>음악채팅</figcaption></figure>
+        <figure><img src="assets/images/site/and-4_library_dark.webp" alt="어두운 테마 라이브러리 화면" loading="lazy"><figcaption>라이브러리</figcaption></figure>
+        <figure><img src="assets/images/site/and-5_player_dark.webp" alt="어두운 테마 재생 화면" loading="lazy"><figcaption>재생 중</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="studio">
+  <div class="wrap studio-grid">
+    <div>
+      <p class="mono">A3 · Web</p>
+      <h2 style="font-size:clamp(30px,5vw,56px);font-weight:600;margin-top:12px">STÉRO Studio</h2>
+      <p style="color:var(--muted);margin-top:16px">앱에서 만들던 AI 음악을 브라우저에서도. 인디 음악 스트리밍 사이트 곰곰디스크 안에 STÉRO Studio가 들어 있어요. 오른쪽은 화면 구성을 보여 주는 예시예요.</p>
+      <ul class="facts">
+        <li><span>모드</span><span>채팅, 심플, 커스텀</span></li>
+        <li><span>내 목소리</span><span>내 목소리를 등록해 곡에 쓰기</span></li>
+        <li><span>공유</span><span>만든 곡을 곰곰디스크에 바로 올리기</span></li>
+      </ul>
+    </div>
+    <div class="browser" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><span class="url">gomgomdisk · /create</span></div>
+      <div class="body">
+        <aside><b><img src="assets/images/site/icon-studio.webp" alt="">Studio</b><span>라이브러리</span><span>내 목소리</span><span>보관함</span><span>올리기</span></aside>
+        <main>
+          <div class="tabs"><span class="on">채팅</span><span>심플</span><span>커스텀</span></div>
+          <p class="msg me" style="max-width:80%">여름밤 드라이브에 어울리는 시티팝</p>
+          <p class="msg ai" style="max-width:80%"><span class="who">STÉRO</span>BPM 108, 펑키한 베이스와 신스 브라스로 설계했어요.</p>
+        </main>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="wrap">
+    <div class="head">
+      <p class="mono">Side B · Lab</p>
+      <h2>다음 트랙</h2>
+      <p>아직 만들고 있는 앱들이에요. 출시 일정은 정해지면 이곳에서 알려 드릴게요.</p>
+    </div>
+    <div class="lab">
+      <article class="card wide">
+        <div class="stage stage-row">
+          <span class="chip kind">실제 화면 · 개발 중 빌드</span>
+          <div class="reel" tabindex="0" aria-label="STÉRO Chat 화면">
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-ob1.webp" alt="온보딩 1: 같은 노래를, 같은 순간에" loading="lazy"></span><figcaption>같은 순간에</figcaption></figure>
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-ob2.webp" alt="온보딩 2: 누구나 DJ가 되는 라디오 팟" loading="lazy"></span><figcaption>라디오 팟</figcaption></figure>
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-ob3.webp" alt="온보딩 3: AI와 음악 수다" loading="lazy"></span><figcaption>STÉRO AI</figcaption></figure>
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-ob4.webp" alt="온보딩 4: 만들고 공유하고" loading="lazy"></span><figcaption>스티커 · 피드</figcaption></figure>
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-guide.webp" alt="채팅방: 같이 듣기 안내" loading="lazy"></span><figcaption>채팅방</figcaption></figure>
+            <figure class="shot"><span class="bezel"><img src="assets/images/site/chat-feed.webp" alt="피드: 이미지와 영상 그리드" loading="lazy"></span><figcaption>피드</figcaption></figure>
+          </div>
+        </div>
+        <h3><span class="ttl">STÉRO Chat</span><span class="status dev">개발 중</span></h3>
+        <p>친구와 같은 노래를 같은 순간에 들으며 대화하는 채팅 앱. 음악 카드를 보내면 상대 기기에서도 같은 부분이 동시에 재생되고, 나중에 들어와도 지금 재생 위치로 합류해요. 누구나 DJ가 되는 라디오 팟, 노래를 추천하는 STÉRO AI, AI 스티커와 피드도 담았어요.</p>
+      </article>
+      <article class="card">
+        <div class="stage">
+          <span class="chip kind">가상 화면</span>
+          <div class="dev dev-pad" role="img" aria-label="STÉRO Cut 편집 화면 예시"><div class="scr">
+            <div class="cut-side"><img src="assets/images/site/icon-cut.webp" alt=""><span>플레이어</span><span class="on">편집</span><span>AI Studio</span><span>라이브러리</span></div>
+            <div class="cut-view">
+              <div class="cut-frame"><span class="title">Summer Drive</span></div>
+              <div class="cut-tc"><span>00:00:12:08</span><span>4K · 60fps</span><span>00:02:38:00</span></div>
+            </div>
+            <div class="cut-insp">
+              <b>인스펙터</b>
+              <div class="cut-knob"><span class="s-mut">위치 X</span><div><i></i></div></div>
+              <div class="cut-knob"><span class="s-mut">회전</span><div><i style="width:30%"></i></div></div>
+              <div class="cut-knob"><span class="s-mut">불투명도</span><div><i style="width:85%"></i></div></div>
+              <div class="cut-ai">AI · 박자에 맞춰 컷 나누는 중</div>
+            </div>
+            <div class="cut-tl">
+              <div class="lane"><span>V2</span><div><i class="clip" style="left:30%;width:22%;background:#a259f0;--dx:40px"></i></div></div>
+              <div class="lane"><span>V1</span><div><i class="clip" style="left:0;width:34%;background:#ff6b35;--dx:-24px"></i><i class="clip" style="left:36%;width:40%;background:#ff8a5c;--dx:30px;animation-delay:.3s"></i></div></div>
+              <div class="lane"><span>A1</span><div><i class="clip" style="left:0;width:92%;background:#3d7a5a;--dx:0px"></i></div></div>
+              <i class="phead"></i>
+            </div>
+          </div></div>
+        </div>
+        <h3><span class="ttl">STÉRO Cut</span><span class="status dev">개발 중</span></h3>
+        <p>아이패드와 맥을 위한 영상 플레이어와 AI 영상 편집 도구. 박자에 맞춘 컷 편집과 키프레임 모션을 준비하고 있어요.</p>
+      </article>
+      <article class="card">
+        <div class="stage">
+          <span class="chip kind">가상 화면</span>
+          <div class="dev dev-phone" role="img" aria-label="STÉRO 3D 생성 화면 예시"><div class="scr">
+            <b style="font-size:13px">3D 만들기</b>
+            <div class="s-card">귀여운 고양이 피규어, 파스텔 톤</div>
+            <div class="d3-view"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="s-row s-mut"><span>모델 생성 중</span><span style="margin-left:auto">약 40초</span></div>
+            <div class="d3-prog"><i></i></div>
+            <div class="d3-fmt"><span>GLB</span><span>USDZ</span><span>AR 보기</span></div>
+          </div></div>
+        </div>
+        <h3><span class="ttl">STÉRO 3D</span><span class="status dev">기획</span></h3>
+        <p>글이나 이미지 한 장으로 3D 모델을 만드는 앱을 준비하고 있어요.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="display:grid;gap:10px">
+      <a class="mark" href="#top"><i aria-hidden="true"><b></b><b></b></i>STÉRO</a>
+      <p class="hint">문의 <a class="mail" href="mailto:gomgomgirls@naver.com">gomgomgirls@naver.com</a></p>
+      <a class="btn ig" href="https://www.instagram.com/stero_lite/" target="_blank" rel="noopener"><i aria-hidden="true"></i>@stero_lite 팔로우</a>
+    </div>
+    <ul aria-label="법적 문서">
+      <li><a href="terms.html">이용약관</a></li>
+      <li><a href="privacy.html">개인정보처리방침</a></li>
+      <li><a href="delete-account.html">계정 삭제 안내</a></li>
+      <li><a href="merge.html">채널 합성 (웹 도구)</a></li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>

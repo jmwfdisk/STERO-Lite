@@ -4,38 +4,68 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-iOS 음악 플레이어 앱 **STÉRO Lite**의 정적 마케팅 웹사이트입니다.
-- App Store: https://apps.apple.com/us/app/stero-lite/id6758091280
-- 서비스 주소: https://sterolite.app/
-- 배포: GitHub Pages (CNAME → sterolite.app)
-
-빌드 도구, 패키지 매니저, 프레임워크 없음 — 순수 HTML/CSS/JS로 구성.
+STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시·테스트 중인 앱(STÉRO MUSIC iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
+- App Store: https://apps.apple.com/us/app/stero-lite/id6758091280 · Instagram: https://www.instagram.com/stero_lite/
+- 배포: GitHub Pages, 도메인 `stero.co.kr`(`CNAME`). 메타 태그의 절대 URL(`og:url`·`og:image`·`twitter:*`)도 이 도메인으로 통일 (옛 `sterolite.app` 쓰지 않음)
+- 빌드 도구, 패키지 매니저, 프레임워크, 테스트 없음 — 순수 HTML/CSS/JS. `main`에 푸시하면 바로 배포됨.
 
 ## 로컬 실행
 
 ```bash
-python3 -m http.server 8000
-# http://localhost:8000 접속
+python3 -m http.server 8000   # http://localhost:8000
 ```
 
 ## 페이지 구조
 
-- `index.html` — 메인 랜딩 페이지 (영문 UI, 한글 콘텐츠 혼용)
-- `privacy.html` — 개인정보처리방침 (한글)
-- `terms.html` — 이용약관 (한글)
-- `styles.css` — CSS 커스텀 프로퍼티 기반 전체 스타일
-- `script.js` — 캐러셀 자동 스크롤 (무한 루프를 위해 스크린샷 항목 복제)
+- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → 푸터
+- `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
+- `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO MUSIC 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
+- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오, 사용자가 버튼을 눌러야 소리 남), 채널 합성 슬라이더, `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
 
-## 디자인 시스템 (CSS 커스텀 프로퍼티)
+## 앱 이름 표기 (법적 문서 편집 시 중요)
 
-`styles.css`의 `:root`에 색상 정의:
-- 브랜드 그라디언트: `--gradient-start: #ff6b35` (코랄) → `--gradient-end: #7b2cbf` (퍼플)
-- 카드: 글래스모피즘 — `backdrop-filter: blur` + 반투명 배경
-- 반응형 브레이크포인트: 768px (태블릿), 1024px (데스크탑)
+- iOS 앱: App Store 현재 이름은 **STÉRO Lite**, 이후 업데이트에서 **STÉRO MUSIC**으로 변경 예정 — 이 문구를 그대로 유지
+- Android 앱: **STÉRO Lite**
+- 운영 주체 표기: STÉRO (이하 "회사")
 
-## 주요 패턴
+## 법적 문서 개정 규칙
 
-- **무한 캐러셀**: `script.js`가 DOM 로드 시 `#screenshotsCarousel` 안의 `.screenshot-item` 항목을 복제. CSS `scroll` 키프레임(40초)이 애니메이션을 구동. 마우스 오버 일시정지는 CSS `:hover`로 처리, 터치는 JS로 처리.
-- **접근성**: 링크/버튼에 ARIA 레이블, `prefers-reduced-motion` 지원(캐러셀 애니메이션 비활성화), `focus-visible` 외곽선 — 편집 시 유지할 것.
-- **이미지 경로**: iPhone 스크린샷은 `assets/images/` (1–10.png), iPad Pro 스크린샷은 `assets/images/iPad Pro/` (디렉토리 이름에 공백 포함).
-- **연락처**: gomgomgirls@naver.com (푸터 Contact 링크)
+약관·방침을 개정할 때 한 문서 안에서 여러 곳을 함께 맞춰야 합니다:
+- `<meta name="description">`의 `(시행일: YYYY-MM-DD)`
+- 상단 메타 줄: `시행일`, `이전 시행일`, `적용 앱`
+- 상단의 `이전 변경 (날짜)` 요약 문단
+- 맨 아래 부칙: "이 약관/방침은 YYYY년 M월 D일부터 시행합니다", "종전의 ... 대체합니다"
+
+표기 규칙: 본문의 콜론은 앞뒤 한 칸씩 띄움 (`<strong>시행일</strong> : 2026-11-04`). 메타 줄 구분자는 `&nbsp;|&nbsp;`.
+
+커밋 메시지는 `docs:`(문서), `style:`, `feat:`, `assets:` 접두어 + 한글 설명 형식.
+
+## 디자인 시스템
+
+`styles.css`의 `:root` 토큰 — 다크가 기본, `prefers-color-scheme: light`와 `[data-theme]`에서 같은 토큰만 다시 정의:
+- 채널 색: `--ch-l`(코랄, 왼쪽 채널) · `--ch-r`(퍼플, 오른쪽 채널). "두 채널이 하나로"가 사이트 전체 모티프
+- 글꼴(Google Fonts): `--display` Unbounded, `--body` IBM Plex Sans KR, `--mono` JetBrains Mono. 법적 문서 `<head>`에도 같은 폰트 링크가 있다
+- 기기 화면 목업(`.dev`, Cut·3D 가상 화면) 안쪽은 앱 자체 화면이라 테마와 무관한 고정 색을 쓴다
+- 이징 `--ease-in`·`--ease-em`. 모션은 CSS 스크롤 연동(`animation-timeline: view()`, 미지원 시 그냥 보임)과 IntersectionObserver
+
+## 사용법 단계(`.story`)
+
+- 왼쪽 고정 화면(`.phone .screen img[data-k]`)과 오른쪽 단계(`.step[data-k]`)의 `data-k`가 짝. 단계를 추가하면 이미지·단계·`.dots i` 개수를 함께 맞춘다
+- 900px 미만에서는 고정 화면을 숨기고 각 단계 안의 `.inline` 이미지를 보여 준다
+- STÉRO MUSIC 화면은 App Store용 스크린샷(자체 휴대폰 프레임 포함)이라 테두리 없이 둥근 카드로, Lite는 실기기 캡처(`.story.lite`, 비율 1080/2120)
+
+## 접근성 — 편집 시 유지
+
+링크/버튼 ARIA 레이블, `prefers-reduced-motion`(CSS 애니메이션 전부 끄고 캔버스는 정지 프레임만 그림), `focus-visible` 외곽선, 소리는 버튼으로만 시작.
+
+## 에셋
+
+- 사이트 이미지: `assets/images/site/*.webp` (원본을 줄여 WebP로 변환한 것). 접두어: `ios-`/`m-`(STÉRO MUSIC), `pad-`(iPad), `card-`(인스타 생일 카드), `lite-`·`and-`(Android), `chat-`(STÉRO Chat), `icon-`(앱 아이콘 — Lite 그린·Studio 코랄은 원본 아이콘 색만 바꾼 웹용 변형)
+- 원본 출처: iOS `앱 개발/STERO Lite/STERO Lite 스크린샷 이미지/`, Android·Chat은 실기기(adb) 캡처와 앱 `drawable-nodpi` 사용 설명 이미지. 실기기 캡처는 상태 표시줄·시스템 바를 잘라 내고, 이메일·관리자 표시 같은 개인 정보는 쓰지 않는다
+- 예전 랜딩의 `assets/images/<번호>.png`, `iPad Pro/`는 현재 페이지에서 쓰지 않는다(`Play.jpg`는 OG 이미지로 사용 중)
+- 파비콘: `assets/images/favicon_io/` (모든 페이지 `<head>`에서 동일하게 참조)
+- `assets/images/music.psd`, `.DS_Store`는 커밋하지 않음
+
+## 연락처
+
+gomgomgirls@naver.com — 랜딩 푸터, 약관·방침 문의처, 계정 삭제 요청 메일(`mailto:` 제목 포함)에 사용
