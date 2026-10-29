@@ -126,7 +126,7 @@
     scope.width = scope.clientWidth * sd; scope.height = scope.clientHeight * sd;
   }
   function sample(buf, x, live) {
-    if (live) return buf[Math.floor(x * (buf.length - 1))] * 2.2;
+    if (live) return buf[Math.floor((x % 1) * (buf.length - 1))] * 2.2;
     // 부드럽게 흘러가는 물결 (Hero는 소리 모양 대신 이걸 쓰고, 소리는 높이·빛으로만 반영)
     // 촘촘한 물결(화면에 3~4개) + 박자처럼 출렁이는 높이
     const beat = 1 + Math.sin(time * 3.2) * .22;
@@ -137,7 +137,7 @@
     ctx.beginPath();
     for (let px = 0; px <= w; px += 3) {
       const x = px / w;
-      const y = cy + sample(buf, (x + phase) % 1, live) * amp * env(from, x);
+      const y = cy + sample(buf, x + phase, live) * amp * env(from, x);
       px ? ctx.lineTo(px, y) : ctx.moveTo(px, y);
     }
     ctx.strokeStyle = color;
@@ -205,7 +205,7 @@
       if (q.x > 1) q.x -= 1; if (q.x < 0) q.x += 1;
       const lane = q.ch ? cy + gap : cy - gap;
       const buf = q.ch ? bufR : bufL;
-      const y = lane + sample(buf, (q.x + (q.ch ? .37 : 0)) % 1, false) * amp * (.55 + (q.ch ? lvlR : lvlL) * 1.6) * env(q.ch ? 'r' : 'l', q.x) + Math.sin(time * 2 + q.ph * 6.28) * 10 * (1 - m);
+      const y = lane + sample(buf, q.x + (q.ch ? .37 : 0), false) * amp * (.55 + (q.ch ? lvlR : lvlL) * 1.6) * env(q.ch ? 'r' : 'l', q.x) + Math.sin(time * 2 + q.ph * 6.28) * 10 * (1 - m);
       g.globalAlpha = (.35 + .65 * Math.abs(Math.sin(time * 1.7 + q.tw))) * (dark ? .9 : .7);
       g.fillStyle = q.ch ? colors.r : colors.l;
       g.beginPath(); g.arc(q.x * W, y, q.r * (1 + energy * 1.8), 0, 6.283); g.fill();
