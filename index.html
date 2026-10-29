@@ -43,10 +43,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261030h">
+  <link rel="stylesheet" href="styles.css?v=20261030i">
 
   <!-- Script -->
-  <script src="script.js?v=20261030h" defer></script>
+  <script src="script.js?v=20261030i" defer></script>
 
   <!-- 구조화 데이터 -->
   <script type="application/ld+json">
@@ -86,6 +86,7 @@
 </header>
 
 <div class="hero" id="top">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <canvas id="wave" aria-hidden="true"></canvas>
   <div class="wrap">
     <p class="mono">STÉRO Series · 2026</p>
@@ -542,20 +543,22 @@
   </div>
 </section>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap">
-    <div style="display:grid;gap:10px">
-      <a class="mark" href="#top"><i aria-hidden="true"><b></b><b></b></i>STÉRO</a>
-      <p class="hint">문의 <a class="mail" href="mailto:gomgomgirls@naver.com">gomgomgirls@naver.com</a></p>
-      <a class="btn ig" href="https://www.instagram.com/stero_lite/" target="_blank" rel="noopener"><i aria-hidden="true"></i>@stero_lite 팔로우</a>
-    </div>
-    <ul aria-label="법적 문서">
-      <li><a href="terms.html">이용약관</a></li>
-      <li><a href="privacy.html">개인정보처리방침</a></li>
-      <li><a href="delete-account.html">계정 삭제 안내</a></li>
-      <li><a href="merge.html">채널 합성 (웹 도구)</a></li>
-    </ul>
+    <nav class="foot-links" aria-label="정책 및 바로가기">
+      <a href="terms.html">이용약관</a><span aria-hidden="true">·</span>
+      <a href="privacy.html"><b>개인정보처리방침</b></a><span aria-hidden="true">·</span>
+      <a href="delete-account.html">계정 삭제 안내</a><span aria-hidden="true">·</span>
+      <a href="merge.html">채널 합성</a><span aria-hidden="true">·</span>
+      <a href="https://www.instagram.com/stero_lite/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <address class="foot-biz">
+      <p>곰곰소녀마켓 · 대표 정민우 · 대전광역시 대덕구 오정로41번길 12, 2층 (오정동) · 이메일 <a href="mailto:gomgomgirls@naver.com">gomgomgirls@naver.com</a></p>
+      <p>사업자등록번호 562-04-02746 · 통신판매업신고 제2024-대전대덕-0620호 · 개인정보보호책임자 정민우 (gomgomgirls@naver.com)</p>
+    </address>
+    <div class="foot-bottom"><span class="mono">© 2026 STÉRO</span><span class="mono">Two channels. One sound.</span></div>
   </div>
 </footer>
+<div class="scroll-pill" role="group" aria-label="페이지 이동"><button type="button" data-dir="down" aria-label="아래로 이동">↓</button><button type="button" data-dir="up" aria-label="맨 위로 이동">↑</button></div>
 </body>
 </html>

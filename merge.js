@@ -240,4 +240,11 @@
     timeEl.textContent = '0:00 / 0:00';
     update();
   });
+
+  /* ---------- 오른쪽 아래 이동 버튼 ---------- */
+  document.querySelectorAll('.scroll-pill button').forEach(b => b.addEventListener('click', () => {
+    const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    if (b.dataset.dir === 'up') scrollTo({ top: 0, behavior });
+    else scrollBy({ top: innerHeight * .85, behavior });
+  }));
 })();

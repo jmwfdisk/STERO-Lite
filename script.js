@@ -112,12 +112,6 @@
     colors = { l: css('--ch-l') || FALLBACK.l, r: css('--ch-r') || FALLBACK.r, m: css('--merge') || FALLBACK.m };
     colors.dark = !/light/.test(getComputedStyle(document.documentElement).colorScheme || '');
   }
-  function rgba(hex, a) {
-    const m = /^#?([0-9a-f]{6})$/i.exec((hex || '').trim());
-    if (!m) return 'rgba(255,255,255,' + a + ')';
-    const n = parseInt(m[1], 16);
-    return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
-  }
   function size() {
     dpr = Math.min(1.5, devicePixelRatio || 1);
     W = cv.clientWidth; H = cv.clientHeight;
@@ -143,12 +137,12 @@
     ctx.strokeStyle = color;
     ctx.stroke();
   }
-  function blob(x, y, r, color, a) {
-    const gr = g.createRadialGradient(x, y, 0, x, y, r);
-    gr.addColorStop(0, rgba(color, a));
-    gr.addColorStop(1, rgba(color, 0));
-    g.fillStyle = gr;
-    g.fillRect(x - r, y - r, r * 2, r * 2);
+  const auras = [...document.querySelectorAll('.aurora i')];
+  function moveAura(i, x, y, r, s, o) {
+    const el = auras[i]; if (!el) return;
+    if (el._r !== r) { el.style.width = el.style.height = (r * 2) + 'px'; el._r = r; }
+    el.style.transform = 'translate3d(' + (x - r) + 'px,' + (y - r) + 'px,0) scale(' + s.toFixed(3) + ')';
+    el.style.opacity = o.toFixed(3);
   }
   const parts = Array.from({ length: 90 }, (_, i) => ({ ch: i % 2, x: Math.random(), v: .0006 + Math.random() * .0016, ph: Math.random(), r: .7 + Math.random() * 1.9, tw: Math.random() * 6.28 }));
   function rms(buf) { let s = 0; for (let i = 0; i < buf.length; i++) s += buf[i] * buf[i]; return Math.sqrt(s / buf.length); }
@@ -172,15 +166,13 @@
     // 모션 블러: 이전 프레임을 조금만 지워 꼬리가 남게 한다 (정지 프레임 모드에서는 완전히 지움)
     if (reduce) { g.globalCompositeOperation = 'source-over'; g.clearRect(0, 0, W, H); }
     else { g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(0, 0, W, H); }
-    // 1) 오로라: L은 왼쪽, R은 오른쪽에서 흐르다 합칠수록 가운데로
-    g.globalCompositeOperation = dark ? 'lighter' : 'source-over';
-    // 꼬리를 남기는 동안 빛이 쌓이므로(약 2배) 한 프레임의 세기는 낮게
-    const big = Math.max(W, H) * (.42 + energy * .25), base = (reduce ? 2 : 1) * (dark ? .13 : .085);
+    // 1) 오로라: CSS 레이어(.aurora i)를 transform으로만 옮긴다 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 40fps로 떨어짐
+    const big = Math.max(W, H) * .42, sc = 1 + energy * .6;
     const lx = W * (.12 + .38 * m) + Math.sin(time * .35) * W * .06, rx = W * (.88 - .38 * m) + Math.sin(time * .3 + 2) * W * .06;
-    blob(lx, H * (.42 + Math.sin(time * .27) * .12), big, colors.l, base);
-    blob(rx, H * (.58 + Math.sin(time * .31 + 1) * .12), big, colors.r, base);
-    blob(W * (.3 + Math.sin(time * .18) * .2), H * (.8 + Math.sin(time * .22) * .1), big * .7, colors.r, base * .5);
-    if (m > .02) blob(W * .5, H * .55, big * .8 * m, colors.m, (reduce ? 2 : 1) * (dark ? .045 : .032) * m);
+    moveAura(0, lx, H * (.42 + Math.sin(time * .27) * .12), big, sc, 1);
+    moveAura(1, rx, H * (.58 + Math.sin(time * .31 + 1) * .12), big, sc, 1);
+    moveAura(2, W * (.3 + Math.sin(time * .18) * .2), H * (.8 + Math.sin(time * .22) * .1), big * .7, sc, .5);
+    moveAura(3, W * .5, H * .55, big * .8, .4 + m * .6, m);
     // 2) 파형 리본 (채널마다 4겹, 맨 앞 줄에 빛 번짐)
     const cy = H * .55, gap = H * .2 * (1 - m), amp = Math.min(80, H * .1) * (1 + energy * .8);
     const balL = Math.min(1, 1 - A.bal), balR = Math.min(1, 1 + A.bal);
@@ -264,4 +256,11 @@
   const by = d => cards.scrollBy({ left: d * (cards.querySelector('figure').offsetWidth + 16), behavior: reduce ? 'auto' : 'smooth' });
   document.getElementById('cPrev').addEventListener('click', () => by(-1));
   document.getElementById('cNext').addEventListener('click', () => by(1));
+
+  /* ---------- 오른쪽 아래 이동 버튼 ---------- */
+  document.querySelectorAll('.scroll-pill button').forEach(b => b.addEventListener('click', () => {
+    const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    if (b.dataset.dir === 'up') scrollTo({ top: 0, behavior });
+    else scrollBy({ top: innerHeight * .85, behavior });
+  }));
 })();

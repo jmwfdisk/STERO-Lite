@@ -31,7 +31,7 @@ python3 -m http.server 8000   # http://localhost:8000
 - `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → 푸터
 - `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
 - `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO MUSIC 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
-- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO MUSIC 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 캔버스(오로라 빛·4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
+- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO MUSIC 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 CSS 오로라 레이어(`.aurora i` 4개, script.js가 transform·opacity만 바꿈 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 24~40fps로 떨어진다) + 캔버스(4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
 
 ## 앱 이름 표기 (법적 문서 편집 시 중요)
 
@@ -76,6 +76,10 @@ python3 -m http.server 8000   # http://localhost:8000
 - 예전 랜딩의 `assets/images/<번호>.png`, `iPad Pro/`는 현재 페이지에서 쓰지 않는다(`Play.jpg`는 OG 이미지로 사용 중)
 - 파비콘: `assets/images/favicon_io/` (모든 페이지 `<head>`에서 동일하게 참조)
 - `assets/images/music.psd`, `.DS_Store`는 커밋하지 않음
+
+## 푸터 (모든 페이지 공통)
+
+`.site-foot`: 밑줄 링크 줄(이용약관 · **개인정보처리방침** · 계정 삭제 안내 · 채널 합성 · Instagram) → 사업자 정보 두 줄 → 저작권 줄. 그래픽스 오버핏 푸터와 같은 구성이고, 사업자 정보도 같다(곰곰소녀마켓 · 대표 정민우 · 주소 · 이메일 / 사업자등록번호 · 통신판매업신고 · 개인정보보호책임자). **전화번호는 넣지 않는다**(사용자 요청). 사업자 정보를 바꾸면 5개 HTML 모두 고친다. `index.html`·`merge.html`에는 오른쪽 아래 `.scroll-pill`(↓ 한 화면 아래 / ↑ 맨 위)도 있다.
 
 ## 연락처
 

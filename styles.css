@@ -19,20 +19,22 @@
   --glass-tint: rgba(255, 255, 255, .045);
   --glass-dim: rgba(13, 11, 18, .32);
   --glass-sheen: rgba(255, 255, 255, .07);
+  --aurora-a: 30%;
+  --aurora-blend: screen;
   color-scheme: dark;
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     --bg: #f5f2f8; --panel: #ffffff; --panel-2: #efe9f5; --line: rgba(26, 21, 34, .12);
     --fg: #1a1522; --muted: #625a70; --ch-l: #e0531c; --ch-r: #7b2cbf; --merge: #1a1522;
-    --glass-tint: rgba(255, 255, 255, .35); --glass-sheen: rgba(255, 255, 255, .45); --glass-dim: rgba(245, 242, 248, .3);
+    --glass-tint: rgba(255, 255, 255, .35); --glass-sheen: rgba(255, 255, 255, .45); --glass-dim: rgba(245, 242, 248, .3); --aurora-a: 22%; --aurora-blend: normal;
     color-scheme: light;
   }
 }
 :root[data-theme="light"] {
   --bg: #f5f2f8; --panel: #ffffff; --panel-2: #efe9f5; --line: rgba(26, 21, 34, .12);
   --fg: #1a1522; --muted: #625a70; --ch-l: #e0531c; --ch-r: #7b2cbf; --merge: #1a1522;
-  --glass-tint: rgba(255, 255, 255, .35); --glass-sheen: rgba(255, 255, 255, .45); --glass-dim: rgba(245, 242, 248, .3);
+  --glass-tint: rgba(255, 255, 255, .35); --glass-sheen: rgba(255, 255, 255, .45); --glass-dim: rgba(245, 242, 248, .3); --aurora-a: 22%; --aurora-blend: normal;
   color-scheme: light;
 }
 
@@ -81,6 +83,16 @@ a { color: inherit; }
 /* Hero */
 .hero { position: relative; isolation: isolate; border-bottom: 1px solid var(--line); }
 .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -3; }
+/* 오로라 빛: 위치·크기는 script.js가 transform으로만 바꾼다(GPU 합성) */
+.aurora { position: absolute; inset: 0; z-index: -4; overflow: hidden; pointer-events: none; }
+.aurora i {
+  position: absolute; left: 0; top: 0; width: 0; height: 0; border-radius: 50%;
+  will-change: transform, opacity; transform-origin: 50% 50%; mix-blend-mode: var(--aurora-blend);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--c) var(--aurora-a), transparent), transparent);
+}
+.aurora i:nth-child(1) { --c: var(--ch-l); }
+.aurora i:nth-child(2), .aurora i:nth-child(3) { --c: var(--ch-r); }
+.aurora i:nth-child(4) { --c: var(--merge); --aurora-a: 12%; }
 /* 반투명 유리창: 옅은 색조·노이즈 질감·사선 반사광. backdrop-filter는 쓰지 않는다 —
    Safari는 같은 요소 안 캔버스까지 흐려 파형이 뭉개지고, Chrome은 거의 안 흐려 브라우저마다 다르게 보인다 */
 .hero::before {
@@ -414,11 +426,27 @@ section > .wrap { padding-block: 96px; }
   .reel .shot { flex: 0 0 150px; scroll-snap-align: start; }
 }
 
-footer .wrap { padding-block: 48px; display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr) auto; }
-footer .btn { justify-self: start; }
-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
-footer code { font-family: var(--mono); font-size: 12px; }
-.mail { user-select: all; color: var(--fg); }
+/* 푸터: 구분선 · 밑줄 링크 줄 · 사업자 정보 · 구분선 · 저작권 줄 (그래픽스 오버핏과 같은 구성) */
+.site-foot .wrap { display: grid; padding-block: 0 40px; }
+.foot-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; padding-block: 40px 18px; border-top: 1px solid var(--line); font-size: 15px; }
+.foot-links a { color: var(--fg); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.foot-links a:hover { text-decoration-thickness: 2px; }
+.foot-links span { color: var(--muted); }
+.foot-biz { font-style: normal; color: var(--muted); font-size: 14px; line-height: 1.85; padding-bottom: 32px; }
+.foot-biz p { margin: 0; }
+.foot-biz a { color: inherit; }
+.foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-top: 26px; border-top: 1px solid var(--line); }
+.foot-bottom .mono { letter-spacing: .18em; color: var(--fg); }
+.privacy-page + .site-foot .wrap { max-width: 820px; }
+/* 오른쪽 아래 떠 있는 이동 버튼 */
+.scroll-pill {
+  position: fixed; z-index: 30; display: flex; border-radius: 999px;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+.scroll-pill button { width: 48px; height: 44px; border: 0; background: transparent; color: var(--fg); font: 500 18px/1 var(--mono); cursor: pointer; border-radius: 999px; }
+.scroll-pill button:hover { background: var(--panel-2); }
 @media (max-width: 640px) { footer .wrap { grid-template-columns: 1fr; } }
 
 @media (prefers-reduced-motion: reduce) {
