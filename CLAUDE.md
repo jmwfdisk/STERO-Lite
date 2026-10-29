@@ -9,6 +9,13 @@ STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 
 - 배포: GitHub Pages, 도메인 `stero.co.kr`(`CNAME`). 메타 태그의 절대 URL(`og:url`·`og:image`·`twitter:*`)도 이 도메인으로 통일 (옛 `sterolite.app` 쓰지 않음)
 - 빌드 도구, 패키지 매니저, 프레임워크, 테스트 없음 — 순수 HTML/CSS/JS. `main`에 푸시하면 바로 배포됨.
 
+## 검색 등록 (네이버·구글, 2026-10-30 완료)
+
+- 네이버 서치어드바이저·구글 서치 콘솔에 `https://stero.co.kr` 등록·소유확인, `sitemap.xml` 제출 완료
+- 모든 HTML `<head>`의 `google-site-verification`·`naver-site-verification` 메타 태그는 소유확인용이라 **지우지 않는다** (새 페이지에도 복사)
+- 새 페이지를 만들면: `sitemap.xml`에 `<url>` 추가, `<link rel="canonical">`·`og:*`·인증 태그를 기존 페이지와 같은 형식으로 넣는다. 대표 주소는 `https://stero.co.kr/…` (www 아님)
+- 검색어 대응: 제목·설명에 "스테로·STÉRO·STERO"를 함께 쓴다
+
 ## 배포 시 캐시
 
 GitHub Pages는 CSS·JS를 10분(`max-age=600`) 캐시한다. `styles.css`·`script.js`·`merge.js`를 바꿔 배포할 때는 모든 HTML의 `?v=YYYYMMDD…` 버전 표시를 함께 올려서, 새 HTML이 예전 CSS로 보이는 일을 막는다.
