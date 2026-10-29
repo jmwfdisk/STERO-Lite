@@ -74,12 +74,27 @@
   }
   toggles.forEach(b => b.addEventListener('click', () => setSound(!A.on)));
 
-  /* ---------- 채널 합성 슬라이더 ---------- */
+  /* ---------- 채널 합성 슬라이더 (Hero 체험 + STÉRO MUSIC 사용법 06, 서로 연동) ---------- */
   const sep = document.getElementById('sep'), sepVal = document.getElementById('sepVal');
-  sep.addEventListener('input', () => {
-    A.sep = 1 - sep.value / 100;
-    sepVal.textContent = sep.value == 100 ? '합성 100%' : sep.value == 0 ? '분리 100%' : '합성 ' + sep.value + '%';
+  const heroSep = document.getElementById('heroSep'), heroSepVal = document.getElementById('heroSepVal');
+  const mixer = document.getElementById('mixer');
+  let mergeP = 0;
+  function setMerge(v) {
+    v = +v;
+    mergeP = v / 100;
+    A.sep = 1 - mergeP;
+    sep.value = heroSep.value = v;
+    sepVal.textContent = v == 100 ? '합성 100%' : v == 0 ? '분리 100%' : '합성 ' + v + '%';
+    heroSepVal.textContent = v >= 100 ? '하나로 · 두 채널이 가운데에서 만나요' : v == 0 ? '분리 · L 패드 | R 아르페지오' : '합성 ' + v + '%';
+    mixer.toggleAttribute('data-merged', v >= 95);
     applyMix();
+    if (reduce) frame();
+  }
+  sep.addEventListener('input', () => setMerge(sep.value));
+  // 슬라이더를 처음 움직이는 순간 소리를 켠다 (사용자 조작이라 자동재생 제한에 걸리지 않음)
+  heroSep.addEventListener('input', () => {
+    if (!A.on) setSound(true);
+    setMerge(heroSep.value);
   });
 
   /* ---------- Hero 파형 ---------- */
@@ -118,12 +133,13 @@
     if (live) { A.anL.getFloatTimeDomainData(bufL); A.anR.getFloatTimeDomainData(bufR); }
     time += .016;
     g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
-    const cy = H * .62, gap = H * .2 * (1 - p), amp = Math.min(70, H * .09);
+    const m = Math.max(p, mergeP);
+    const cy = H * .62, gap = H * .2 * (1 - m), amp = Math.min(70, H * .09);
     const balL = Math.min(1, 1 - A.bal), balR = Math.min(1, 1 + A.bal);
-    g.lineWidth = 2.2; g.globalAlpha = .9 * (1 - p * .6);
+    g.lineWidth = 2.2; g.globalAlpha = .9 * (1 - m * .6);
     line(g, W, H, cy - gap, amp * balL, bufL, live, colors.l, 'l', 0);
     line(g, W, H, cy + gap, amp * balR, bufR, live, colors.r, 'r', .37);
-    if (p > .05) { g.globalAlpha = p; g.lineWidth = 3; line(g, W, H, cy, amp * 1.1, bufL, live, colors.m, 'm', .18); }
+    if (m > .05) { g.globalAlpha = m; g.lineWidth = 3; line(g, W, H, cy, amp * 1.1, bufL, live, colors.m, 'm', .18); }
     g.globalAlpha = 1;
     // 미터 (dB 눈금 -60~0)
     const toW = v => Math.max(0, Math.min(1, (20 * Math.log10(v + 1e-6) + 60) / 60));

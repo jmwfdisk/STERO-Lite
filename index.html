@@ -91,14 +91,19 @@
     <p class="sub">듣고, 섞고, 말로 만드는 음악 앱 시리즈. 아이폰과 아이패드, 안드로이드, 웹에서 같은 STÉRO를 만나요.</p>
     <div class="actions">
       <button class="btn primary" id="sound" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">소리 켜기</span></button>
-      <a class="btn" href="#series">시리즈 보기</a>
+      <a class="btn" href="merge.html">내 음원으로 합성하기</a>
     </div>
-    <div class="meters" aria-hidden="true">
-      <div class="meter l"><span class="mono l">L</span><div class="bar"><i id="mL"></i></div></div>
-      <div class="meter r"><span class="mono r">R</span><div class="bar"><i id="mR"></i></div></div>
-      <div class="scale"><span>-60</span><span>-40</span><span>-24</span><span>-12</span><span>-6</span><span>0 dB</span></div>
+    <div class="mixer" id="mixer" role="group" aria-labelledby="mixTitle">
+      <div class="mix-head"><span class="mono" id="mixTitle">채널 합성 체험</span><span class="mono" id="heroSepVal" aria-live="polite">분리 · L 패드 | R 아르페지오</span></div>
+      <div class="meters" aria-hidden="true">
+        <div class="meter l"><span class="mono l">L</span><div class="bar"><i id="mL"></i></div></div>
+        <div class="meter r"><span class="mono r">R</span><div class="bar"><i id="mR"></i></div></div>
+        <div class="scale"><span>-60</span><span>-40</span><span>-24</span><span>-12</span><span>-6</span><span>0 dB</span></div>
+      </div>
+      <label class="mix-slider" for="heroSep"><span class="mono">L | R</span><input type="range" id="heroSep" min="0" max="100" value="0" aria-describedby="heroSepVal"><span class="mono">ONE</span></label>
+      <p class="hint">슬라이더를 오른쪽으로 밀어 두 채널을 하나로 합쳐 보세요. 왼쪽 귀엔 패드, 오른쪽 귀엔 아르페지오가 흐르다 가운데에서 만나요. 이어폰으로 들으면 더 잘 들려요.</p>
+      <a class="mix-cta" href="merge.html"><span class="pre">내 음원 두 개로 직접 합성해 보세요.</span><span class="post">두 채널이 하나가 됐어요. 내 음원으로도 해 볼까요?</span><b>채널 합성 열기 →</b></a>
     </div>
-    <p class="hint">스크롤하면 두 채널이 가운데로 모여요. 소리를 켠 뒤 마우스를 좌우로 움직이면 L·R 밸런스가 바뀝니다.</p>
   </div>
 </div>
 

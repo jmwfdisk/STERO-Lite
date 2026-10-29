@@ -20,7 +20,7 @@ python3 -m http.server 8000   # http://localhost:8000
 - `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → 푸터
 - `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
 - `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO MUSIC 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
-- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오, 사용자가 버튼을 눌러야 소리 남), 채널 합성 슬라이더, `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
+- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO MUSIC 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
 
 ## 앱 이름 표기 (법적 문서 편집 시 중요)
 
@@ -56,7 +56,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 접근성 — 편집 시 유지
 
-링크/버튼 ARIA 레이블, `prefers-reduced-motion`(CSS 애니메이션 전부 끄고 캔버스는 정지 프레임만 그림), `focus-visible` 외곽선, 소리는 버튼으로만 시작.
+링크/버튼 ARIA 레이블, `prefers-reduced-motion`(CSS 애니메이션 전부 끄고 캔버스는 정지 프레임만 그림), `focus-visible` 외곽선, 소리는 사용자 조작(버튼·Hero 슬라이더)으로만 시작.
 
 ## 에셋
 
