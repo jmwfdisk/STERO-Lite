@@ -105,7 +105,7 @@
   const cv = document.getElementById('wave'), g = cv.getContext('2d');
   const scope = document.getElementById('scope'), sg = scope.getContext('2d');
   const bufL = new Float32Array(1024), bufR = new Float32Array(1024);
-  let W = 0, H = 0, dpr = 1, p = 0, time = 0, colors = {}, energy = 0;
+  let W = 0, H = 0, dpr = 1, p = 0, time = 0, colors = {}, energy = 0, lvlL = .25, lvlR = .25;
   // CSS가 늦게 적용되면 토큰이 빈 문자열 → 기본값으로 그린다 (빈 색을 그라디언트에 넣으면 예외가 나서 루프가 멈춤)
   const FALLBACK = { l: '#ff6b35', r: '#a259f0', m: '#f3eef8' };
   function readColors() {
@@ -127,7 +127,8 @@
   }
   function sample(buf, x, live) {
     if (live) return buf[Math.floor(x * (buf.length - 1))] * 2.2;
-    return Math.sin(x * 9 + time * 1.3) * .55 + Math.sin(x * 23 - time * 2.1) * .25 + Math.sin(x * 51 + time * .7) * .12;
+    // 부드럽게 흘러가는 물결 (Hero는 소리 모양 대신 이걸 쓰고, 소리는 높이·빛으로만 반영)
+    return Math.sin(x * 7 - time * 2.6) * .58 + Math.sin(x * 17 + time * 1.9) * .27 + Math.sin(x * 37 - time * 3.4) * .13;
   }
   function env(from, x) { return from === 'l' ? 1 - x * .7 : from === 'r' ? .3 + x * .7 : 1; }
   function line(ctx, w, cy, amp, buf, live, color, from, phase) {
@@ -158,37 +159,39 @@
     const lv = live ? rms(bufL) : .12 + Math.abs(Math.sin(time * 2.3)) * .08;
     const rv = live ? rms(bufR) : .12 + Math.abs(Math.sin(time * 1.9 + 1)) * .08;
     energy += ((live ? Math.min(1, (lv + rv) * 2.2) : .15) - energy) * .08;
+    lvlL += ((live ? Math.min(1, lv * 4) : .25) - lvlL) * .15;
+    lvlR += ((live ? Math.min(1, rv * 4) : .25) - lvlR) * .15;
     mL.style.width = (toW(lv) * 100) + '%'; mR.style.width = (toW(rv) * 100) + '%';
 
     const m = Math.max(p, mergeP), dark = colors.dark;
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     // 모션 블러: 이전 프레임을 조금만 지워 꼬리가 남게 한다 (정지 프레임 모드에서는 완전히 지움)
     if (reduce) { g.globalCompositeOperation = 'source-over'; g.clearRect(0, 0, W, H); }
-    else { g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,.22)'; g.fillRect(0, 0, W, H); }
+    else { g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(0, 0, W, H); }
     // 1) 오로라: L은 왼쪽, R은 오른쪽에서 흐르다 합칠수록 가운데로
     g.globalCompositeOperation = dark ? 'lighter' : 'source-over';
-    // 꼬리를 남기는 동안 빛이 쌓이므로(약 4.5배) 한 프레임의 세기는 낮게
-    const big = Math.max(W, H) * (.42 + energy * .25), base = (reduce ? 4.5 : 1) * (dark ? .06 : .04);
+    // 꼬리를 남기는 동안 빛이 쌓이므로(약 2.9배) 한 프레임의 세기는 낮게
+    const big = Math.max(W, H) * (.42 + energy * .25), base = (reduce ? 2.9 : 1) * (dark ? .09 : .06);
     const lx = W * (.12 + .38 * m) + Math.sin(time * .35) * W * .06, rx = W * (.88 - .38 * m) + Math.sin(time * .3 + 2) * W * .06;
     blob(lx, H * (.42 + Math.sin(time * .27) * .12), big, colors.l, base);
     blob(rx, H * (.58 + Math.sin(time * .31 + 1) * .12), big, colors.r, base);
     blob(W * (.3 + Math.sin(time * .18) * .2), H * (.8 + Math.sin(time * .22) * .1), big * .7, colors.r, base * .5);
-    if (m > .02) blob(W * .5, H * .55, big * .8 * m, colors.m, (reduce ? 4.5 : 1) * (dark ? .02 : .015) * m);
+    if (m > .02) blob(W * .5, H * .55, big * .8 * m, colors.m, (reduce ? 2.9 : 1) * (dark ? .03 : .022) * m);
     // 2) 파형 리본 (채널마다 4겹, 맨 앞 줄에 빛 번짐)
     const cy = H * .55, gap = H * .2 * (1 - m), amp = Math.min(80, H * .1) * (1 + energy * .8);
     const balL = Math.min(1, 1 - A.bal), balR = Math.min(1, 1 + A.bal);
     g.globalCompositeOperation = 'source-over';
-    for (const [y0, a, buf, col, from, ph] of [[cy - gap, amp * balL, bufL, colors.l, 'l', 0], [cy + gap, amp * balR, bufR, colors.r, 'r', .37]]) {
+    for (const [y0, a, buf, col, from, ph] of [[cy - gap, amp * balL * (.55 + lvlL * 1.6), bufL, colors.l, 'l', 0], [cy + gap, amp * balR * (.55 + lvlR * 1.6), bufR, colors.r, 'r', .37]]) {
       for (let k = 3; k >= 0; k--) {
         g.globalAlpha = (k ? .22 - k * .04 : .95) * (1 - m * .55);
-        g.lineWidth = k ? 1 : 2.4;
+        g.lineWidth = k ? 1.5 : 3.5;
         g.shadowBlur = k ? 0 : 16 + energy * 24; g.shadowColor = col;
-        line(g, W, y0 + k * 7, a * (1 - k * .14), buf, live, col, from, ph + k * .045);
+        line(g, W, y0 + k * 8, a * (1 - k * .14), buf, false, col, from, ph + k * .045);
       }
     }
     if (m > .05) {
-      g.globalAlpha = m; g.lineWidth = 3; g.shadowBlur = 22 + energy * 20; g.shadowColor = colors.m;
-      line(g, W, cy, amp * 1.1, bufL, live, colors.m, 'm', .18);
+      g.globalAlpha = m; g.lineWidth = 4; g.shadowBlur = 22 + energy * 20; g.shadowColor = colors.m;
+      line(g, W, cy, amp * 1.1 * (.55 + (lvlL + lvlR) * .8), bufL, false, colors.m, 'm', .18);
     }
     g.shadowBlur = 0;
     // 3) 빛 입자: 파형을 따라 흐르다 합치면 가운데 선으로
@@ -198,7 +201,7 @@
       if (q.x > 1) q.x -= 1; if (q.x < 0) q.x += 1;
       const lane = q.ch ? cy + gap : cy - gap;
       const buf = q.ch ? bufR : bufL;
-      const y = lane + sample(buf, (q.x + (q.ch ? .37 : 0)) % 1, live) * amp * env(q.ch ? 'r' : 'l', q.x) + Math.sin(time * 2 + q.ph * 6.28) * 10 * (1 - m);
+      const y = lane + sample(buf, (q.x + (q.ch ? .37 : 0)) % 1, false) * amp * (.55 + (q.ch ? lvlR : lvlL) * 1.6) * env(q.ch ? 'r' : 'l', q.x) + Math.sin(time * 2 + q.ph * 6.28) * 10 * (1 - m);
       g.globalAlpha = (.35 + .65 * Math.abs(Math.sin(time * 1.7 + q.tw))) * (dark ? .9 : .7);
       g.fillStyle = q.ch ? colors.r : colors.l;
       g.beginPath(); g.arc(q.x * W, y, q.r * (1 + energy * 1.8), 0, 6.283); g.fill();
