@@ -128,7 +128,9 @@
   function sample(buf, x, live) {
     if (live) return buf[Math.floor(x * (buf.length - 1))] * 2.2;
     // 부드럽게 흘러가는 물결 (Hero는 소리 모양 대신 이걸 쓰고, 소리는 높이·빛으로만 반영)
-    return Math.sin(x * 7 - time * 6.5) * .58 + Math.sin(x * 17 + time * 4.6) * .27 + Math.sin(x * 37 - time * 8.5) * .13;
+    // 촘촘한 물결(화면에 3~4개) + 박자처럼 출렁이는 높이
+    const beat = 1 + Math.sin(time * 3.2) * .22;
+    return (Math.sin(x * 15 - time * 9) * .55 + Math.sin(x * 31 + time * 6.5) * .28 + Math.sin(x * 63 - time * 13) * .17) * beat;
   }
   function env(from, x) { return from === 'l' ? 1 - x * .7 : from === 'r' ? .3 + x * .7 : 1; }
   function line(ctx, w, cy, amp, buf, live, color, from, phase) {
@@ -169,16 +171,16 @@
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     // 모션 블러: 이전 프레임을 조금만 지워 꼬리가 남게 한다 (정지 프레임 모드에서는 완전히 지움)
     if (reduce) { g.globalCompositeOperation = 'source-over'; g.clearRect(0, 0, W, H); }
-    else { g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(0, 0, W, H); }
+    else { g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(0, 0, W, H); }
     // 1) 오로라: L은 왼쪽, R은 오른쪽에서 흐르다 합칠수록 가운데로
     g.globalCompositeOperation = dark ? 'lighter' : 'source-over';
-    // 꼬리를 남기는 동안 빛이 쌓이므로(약 2.9배) 한 프레임의 세기는 낮게
-    const big = Math.max(W, H) * (.42 + energy * .25), base = (reduce ? 2.9 : 1) * (dark ? .09 : .06);
+    // 꼬리를 남기는 동안 빛이 쌓이므로(약 2배) 한 프레임의 세기는 낮게
+    const big = Math.max(W, H) * (.42 + energy * .25), base = (reduce ? 2 : 1) * (dark ? .13 : .085);
     const lx = W * (.12 + .38 * m) + Math.sin(time * .35) * W * .06, rx = W * (.88 - .38 * m) + Math.sin(time * .3 + 2) * W * .06;
     blob(lx, H * (.42 + Math.sin(time * .27) * .12), big, colors.l, base);
     blob(rx, H * (.58 + Math.sin(time * .31 + 1) * .12), big, colors.r, base);
     blob(W * (.3 + Math.sin(time * .18) * .2), H * (.8 + Math.sin(time * .22) * .1), big * .7, colors.r, base * .5);
-    if (m > .02) blob(W * .5, H * .55, big * .8 * m, colors.m, (reduce ? 2.9 : 1) * (dark ? .03 : .022) * m);
+    if (m > .02) blob(W * .5, H * .55, big * .8 * m, colors.m, (reduce ? 2 : 1) * (dark ? .045 : .032) * m);
     // 2) 파형 리본 (채널마다 4겹, 맨 앞 줄에 빛 번짐)
     const cy = H * .55, gap = H * .2 * (1 - m), amp = Math.min(80, H * .1) * (1 + energy * .8);
     const balL = Math.min(1, 1 - A.bal), balR = Math.min(1, 1 + A.bal);
