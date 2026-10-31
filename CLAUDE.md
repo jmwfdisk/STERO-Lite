@@ -62,6 +62,7 @@ python3 -m http.server 8000   # http://localhost:8000
 `styles.css`의 `:root` 토큰 — 다크가 기본, `prefers-color-scheme: light`와 `[data-theme]`에서 같은 토큰만 다시 정의:
 - 채널 색: `--ch-l`(코랄, 왼쪽 채널) · `--ch-r`(퍼플, 오른쪽 채널). "두 채널이 하나로"가 사이트 전체 모티프
 - 글꼴(Google Fonts): `--display` Unbounded, `--body` IBM Plex Sans KR, `--mono` JetBrains Mono. 법적 문서 `<head>`에도 같은 폰트 링크가 있다
+- 헤더 로고 뒤 `.mark-wave`: 주기 170px 물결을 두 번 그린 SVG 3개를 CSS `translateX(-50%)`로 반복(transform만, JS 없음). 물결 모양을 바꾸면 시작·끝 y가 같아야 이음새가 안 보인다
 - 기기 화면 목업(`.dev`, Cut·3D 가상 화면) 안쪽은 앱 자체 화면이라 테마와 무관한 고정 색을 쓴다
 - 이징 `--ease-in`·`--ease-em`. 모션은 CSS 스크롤 연동(`animation-timeline: view()`, 미지원 시 그냥 보임)과 IntersectionObserver
 

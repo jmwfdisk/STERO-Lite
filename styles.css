@@ -77,6 +77,20 @@ a { color: inherit; }
 .mark i { display: inline-flex; gap: 2px; }
 .mark i b { width: 6px; height: 16px; border-radius: 2px; background: var(--ch-l); }
 .mark i b + b { background: var(--ch-r); }
+/* 로고 뒤 파장 라인 — 주기 170px 물결을 두 번 그린 SVG를 -50% 이동해 끊김 없이 반복(transform만 움직임) */
+.mark { position: relative; isolation: isolate; }
+.mark-wave {
+  position: absolute; z-index: -1; left: -18px; top: 50%; width: 170px; height: 40px; margin-top: -20px;
+  overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 72%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 18%, #000 72%, transparent);
+}
+.mark-wave svg { position: absolute; left: 0; top: 0; width: 200%; height: 100%; overflow: visible; fill: none; stroke-linecap: round; animation: mark-wave 7s linear infinite; }
+.mark-wave .w { stroke: var(--fg); stroke-width: 2; opacity: .32; filter: drop-shadow(0 0 3px var(--fg)); animation-duration: 9s; }
+.mark-wave .l { stroke: var(--ch-l); stroke-width: 1.4; opacity: .75; filter: drop-shadow(0 0 3px var(--ch-l)); animation-duration: 5.5s; }
+.mark-wave .r { stroke: var(--ch-r); stroke-width: 1.6; opacity: .8; filter: drop-shadow(0 0 3px var(--ch-r)); animation-duration: 7.5s; animation-direction: reverse; }
+.mark-wave path { vector-effect: non-scaling-stroke; }
+@keyframes mark-wave { to { transform: translateX(-50%); } }
 .top nav { display: flex; gap: 20px; margin-left: auto; }
 .top nav a { text-decoration: none; font-size: 14px; color: var(--muted); }
 .top nav a:hover { color: var(--fg); }
