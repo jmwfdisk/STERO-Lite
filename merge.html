@@ -40,10 +40,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261031b">
+  <link rel="stylesheet" href="styles.css?v=20261031c">
 
   <!-- Script -->
-  <script src="merge.js?v=20261031b" defer></script>
+  <script src="merge.js?v=20261031c" defer></script>
 
   <!-- 구조화 데이터 -->
   <script type="application/ld+json">
@@ -73,19 +73,19 @@
 <main class="mg">
   <div class="wrap">
     <div class="mg-head">
-      <p class="mono">STÉRO MUSIC 기능 · Web</p>
+      <p class="mono ko">STÉRO MUSIC 기능 · Web</p>
       <h1>채널 합성</h1>
       <p>두 개의 음원을 <b class="l">왼쪽(L)</b>과 <b class="r">오른쪽(R)</b> 채널로 나눠 하나의 스테레오 파일로 만들어요. STÉRO MUSIC 앱의 채널 합성과 같은 방식이에요.</p>
       <ul class="mg-facts">
-        <li><span class="mono">처리</span>내 브라우저 안에서만 · 서버 전송 없음</li>
-        <li><span class="mono">입력</span>MP3 · M4A · WAV · AAC · MP4 영상의 소리</li>
-        <li><span class="mono">출력</span>WAV (16bit 스테레오)</li>
+        <li><span class="mono ko">처리</span>내 브라우저 안에서만 · 서버 전송 없음</li>
+        <li><span class="mono ko">입력</span>MP3 · M4A · WAV · AAC · MP4 영상의 소리</li>
+        <li><span class="mono ko">출력</span>WAV (16bit 스테레오)</li>
       </ul>
     </div>
 
     <!-- 1. 저작권 동의 -->
     <section class="mg-consent" aria-labelledby="consentTitle">
-      <h2 id="consentTitle"><span class="mono">시작하기 전에</span>저작권 확인</h2>
+      <h2 id="consentTitle"><span class="mono ko">시작하기 전에</span>저작권 확인</h2>
       <p>이 도구로 만든 결과물에는 원래 음원의 권리가 그대로 남아 있어요. <b>권리가 없는 음원을 넣어 만든 파일을 공유·배포·업로드·판매해 제3자의 저작권을 침해하면, 그 책임은 이 도구를 사용한 본인에게 있습니다.</b> 아래 두 항목에 동의해야 파일을 고를 수 있어요.</p>
       <label class="check"><input type="checkbox" id="agree1"><span>내가 직접 만들었거나, 권리자에게 이용 허락을 받았거나, 자유롭게 쓸 수 있는 음원만 사용합니다.</span></label>
       <label class="check"><input type="checkbox" id="agree2"><span>권리가 없는 음원을 사용해 생기는 저작권 침해 등 모든 법적 책임은 본인에게 있으며, STÉRO는 이에 책임지지 않는다는 점을 이해했습니다. <a href="#notice">자세한 안내 보기</a></span></label>
@@ -98,7 +98,7 @@
 
       <div class="mg-slots">
         <div class="slot l" data-ch="0">
-          <div class="slot-top"><span class="ch">L</span><span class="mono">왼쪽 채널</span></div>
+          <div class="slot-top"><span class="ch">L</span><span class="mono ko">왼쪽 채널</span></div>
           <label class="drop" for="fileL">
             <input type="file" id="fileL" accept="audio/*,video/mp4,video/quicktime,.m4a,.mp3,.wav,.aac,.flac,.ogg">
             <span class="drop-empty">파일을 고르거나 여기로 끌어 놓으세요</span>
@@ -109,7 +109,7 @@
           <label class="vol"><span>볼륨</span><input type="range" id="volL" min="-12" max="12" step="0.5" value="0"><output for="volL" class="mono">0.0 dB</output></label>
         </div>
         <div class="slot r" data-ch="1">
-          <div class="slot-top"><span class="ch">R</span><span class="mono">오른쪽 채널</span></div>
+          <div class="slot-top"><span class="ch">R</span><span class="mono ko">오른쪽 채널</span></div>
           <label class="drop" for="fileR">
             <input type="file" id="fileR" accept="audio/*,video/mp4,video/quicktime,.m4a,.mp3,.wav,.aac,.flac,.ogg">
             <span class="drop-empty">파일을 고르거나 여기로 끌어 놓으세요</span>
@@ -133,7 +133,7 @@
 
     <!-- 3. 이용 안내 및 저작권 주의 -->
     <section class="mg-notice" id="notice" aria-labelledby="noticeTitle">
-      <h2 id="noticeTitle"><span class="mono">이용 안내</span>채널 합성 이용 안내 및 저작권 주의</h2>
+      <h2 id="noticeTitle"><span class="mono ko">이용 안내</span>채널 합성 이용 안내 및 저작권 주의</h2>
 
       <h3>1. 파일은 어디에서 처리되나요</h3>
       <ul>
