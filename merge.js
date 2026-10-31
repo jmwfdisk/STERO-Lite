@@ -247,4 +247,11 @@
     if (b.dataset.dir === 'up') scrollTo({ top: 0, behavior });
     else scrollBy({ top: innerHeight * .85, behavior });
   }));
+
+  const pill = document.querySelector('.scroll-pill');
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    pill.classList.toggle('show', scrollY < lastY && scrollY > innerHeight);
+    lastY = scrollY;
+  }, { passive: true });
 })();
