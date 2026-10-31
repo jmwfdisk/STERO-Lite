@@ -76,7 +76,7 @@ a { color: inherit; }
 }
 .top .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
 .mark { font: 800 20px/1 var(--display); letter-spacing: .02em; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-.mark-icon { width: 28px; height: 28px; border-radius: 7px; flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 4px 12px rgba(0, 0, 0, .25); }
+.mark-icon { width: 28px; height: 28px; flex: none; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .3)); }
 /* 로고 뒤 파장 라인 — 주기 170px 물결을 두 번 그린 SVG를 -50% 이동해 끊김 없이 반복(transform만 움직임) */
 .mark { position: relative; isolation: isolate; }
 .mark-wave {

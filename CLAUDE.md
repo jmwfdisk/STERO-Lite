@@ -79,7 +79,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 에셋
 
-- 사이트 이미지: `assets/images/site/*.webp` (원본을 줄여 WebP로 변환한 것). 접두어: `ios-`/`m-`(STÉRO MUSIC), `pad-`(iPad), `card-`(인스타 생일 카드), `lite-`·`and-`(Android), `chat-`(STÉRO Chat), `icon-`(앱 아이콘 — Lite 그린·Studio 코랄·헤더 로고 `icon-mark` 크림·골드는 원본 아이콘 색만 바꾼 웹용 변형)
+- 사이트 이미지: `assets/images/site/*.webp` (원본을 줄여 WebP로 변환한 것). 접두어: `ios-`/`m-`(STÉRO MUSIC), `pad-`(iPad), `card-`(인스타 생일 카드), `lite-`·`and-`(Android), `chat-`(STÉRO Chat), `icon-`(앱 아이콘 — Lite 그린·Studio 코랄은 원본 아이콘 색만 바꾼 웹용 변형. 헤더 로고 `icon-mark`는 투명 배경 그린 음표 `앱 개발/STERO Lite/STERO Lite Android 2.1/음표아이콘.png`를 줄인 것)
 - 원본 출처: iOS `앱 개발/STERO Lite/STERO Lite 스크린샷 이미지/`, Android·Chat은 실기기(adb) 캡처와 앱 `drawable-nodpi` 사용 설명 이미지. 실기기 캡처는 상태 표시줄·시스템 바를 잘라 내고, 이메일·관리자 표시 같은 개인 정보는 쓰지 않는다
 - 예전 랜딩의 `assets/images/<번호>.png`, `iPad Pro/`는 현재 페이지에서 쓰지 않는다(`Play.jpg`는 OG 이미지로 사용 중)
 - 파비콘: `assets/images/favicon_io/` (모든 페이지 `<head>`에서 동일하게 참조)
