@@ -64,7 +64,7 @@ a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ch-l); outline-offset: 3px; border-radius: 4px; }
 .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 /* 한글이 든 머리글: 고정폭 글꼴의 넓은 띄어쓰기·자간 때문에 글자가 흩어져 보여서 좁힌다 */
-.mono.ko { letter-spacing: .02em; word-spacing: -.32em; }
+.mono.ko, .chip.ko { letter-spacing: .02em; word-spacing: -.32em; }
 .l { color: var(--ch-l); } .r { color: var(--ch-r); }
 
 /* 상단 바 */
