@@ -26,36 +26,43 @@ STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 
 
 GitHub Pages는 CSS·JS를 10분(`max-age=600`) 캐시한다. `styles.css`·`script.js`·`merge.js`를 바꿔 배포할 때는 모든 HTML의 `?v=YYYYMMDD…` 버전 표시를 함께 올려서, 새 HTML이 예전 CSS로 보이는 일을 막는다.
 
+## 배포 절차
+
+- `main`에 업스트림이 없어 `git push`만 하면 실패한다 — `git push origin main`. 푸시 전에 사용자 승인을 받고, 1~2분 뒤 `curl`로 라이브 반영을 확인한다
+- 작업 트리에 다른 세션의 미커밋 변경(예: 시행일이 `2026-__-__` 자리표시인 약관 개정안)이 남아 있을 수 있다. `git add -A` 대신 파일을 지정해 커밋하고, 자리표시가 남은 법적 문서는 커밋·푸시하지 않는다
+- 커밋 메시지: `feat:`·`fix:`·`style:`·`assets:`·`docs:`(내부 문서)·`terms:`(약관·방침 개정, 시행일을 함께 적음) 접두어 + 한글 설명
+
 ## 로컬 실행
 
 ```bash
 python3 -m http.server 8000   # http://localhost:8000
 ```
 
+화면 확인은 로컬 서버 + headless Chrome CDP 캡처(Safari 비교는 `safaridriver`)로 한다 — 구체적인 방법과 함정은 개발일지 시작 안내의 「검증 도구」·「주의」에 있다.
+
 ## 페이지 구조
 
-- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → 푸터
+- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → `#get`(마무리: 받는 곳 카드 3장 — App Store / Android 비공개 테스트 상태 / 웹 채널 합성) → 푸터. 헤더 오른쪽 `.nav-cta`(App Store)는 720px 미만에서 메뉴가 숨겨져도 남는다(`merge.html`에도 있음)
 - `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
 - `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO MUSIC 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
 - `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO MUSIC 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 CSS 오로라 레이어(`.aurora i` 4개, script.js가 transform·opacity만 바꿈 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 24~40fps로 떨어진다) + 캔버스(4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼
 
 ## 앱 이름 표기 (법적 문서 편집 시 중요)
 
-- iOS 앱: App Store 현재 이름은 **STÉRO Lite**, 이후 업데이트에서 **STÉRO MUSIC**으로 변경 예정 — 이 문구를 그대로 유지
+- iOS 앱: 배포된 법적 문서는 "**STÉRO Lite** (App Store 현재 이름, 이후 업데이트에서 STÉRO MUSIC으로 변경 예정)". 2.2 개정안(미커밋)부터는 "**STÉRO Music** (이전 이름 STÉRO Lite)"로 바뀐다 — 개정안이 시행되면 이 표기로 통일. 과거 변경 이력 문단의 옛 이름은 기록이므로 고치지 않는다
+- 홈페이지(`index.html`·`merge.html`)는 아직 대문자 **STÉRO MUSIC** 표기 — 법적 문서와 맞추는 정리가 열린 과제
 - Android 앱: **STÉRO Lite**
 - 운영 주체 표기: STÉRO (이하 "회사")
 
 ## 법적 문서 개정 규칙
 
 약관·방침을 개정할 때 한 문서 안에서 여러 곳을 함께 맞춰야 합니다:
-- `<meta name="description">`의 `(시행일: YYYY-MM-DD)`
+- `<meta name="description">`의 `(시행일: YYYY-MM-DD)` (앱 이름이 바뀌면 `og:description`도)
 - 상단 메타 줄: `시행일`, `이전 시행일`, `적용 앱`
-- 상단의 `이전 변경 (날짜)` 요약 문단
+- 상단 요약 문단 두 개: 새 개정 내용을 `주요 변경 (새 시행일)`로 쓰고, 기존 `주요 변경`은 `이전 변경 (날짜)`로 내린다(그 전 `이전 변경`은 삭제)
 - 맨 아래 부칙: "이 약관/방침은 YYYY년 M월 D일부터 시행합니다", "종전의 ... 대체합니다"
 
 표기 규칙: 본문의 콜론은 앞뒤 한 칸씩 띄움 (`<strong>시행일</strong> : 2026-11-04`). 메타 줄 구분자는 `&nbsp;|&nbsp;`.
-
-커밋 메시지는 `docs:`(문서), `style:`, `feat:`, `assets:` 접두어 + 한글 설명 형식.
 
 ## 디자인 시스템
 
@@ -65,6 +72,8 @@ python3 -m http.server 8000   # http://localhost:8000
 - 한글이 든 mono 머리글·칩은 `class="mono ko"`·`class="chip ko"`(고정폭 띄어쓰기·자간을 좁힘)
 - 헤더 로고 뒤 `.mark-wave`: 주기 170px 물결을 두 번 그린 SVG 3개를 CSS `translateX(-50%)`로 반복(transform만, JS 없음). 물결 모양을 바꾸면 시작·끝 y가 같아야 이음새가 안 보인다
 - 기기 화면 목업(`.dev`, Cut·3D 가상 화면) 안쪽은 앱 자체 화면이라 테마와 무관한 고정 색을 쓴다
+- 클래스 이름 충돌 주의: 상태 배지에 `.beta`·`.dev`처럼 다른 블록이 쓰는 이름을 붙이면 그 스타일(여백·그림자)을 함께 받는다. 상태는 `is-` 접두어(`.status.is-beta`·`.status.is-dev`)
+- 앱 섹션(`#music`·`#lite`·`#studio`·`#lab`)은 머리 쪽에 `--tint` 색의 옅은 radial 빛을 깐다(Lite만 민트 `#3ecf8e`, 나머지는 채널 색). `#get`의 `.outro-wave`는 L·R 두 파형이 오른쪽에서 한 줄로 합쳐지는 정적 SVG
 - 이징 `--ease-in`·`--ease-em`. 모션은 CSS 스크롤 연동(`animation-timeline: view()`, 미지원 시 그냥 보임)과 IntersectionObserver
 
 ## 사용법 단계(`.story`)
