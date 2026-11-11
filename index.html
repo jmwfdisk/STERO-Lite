@@ -43,10 +43,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="styles.css?v=20261111a">
+  <link rel="stylesheet" href="styles.css?v=20261111b">
 
   <!-- Script -->
-  <script src="script.js?v=20261111a" defer></script>
+  <script src="script.js?v=20261111b" defer></script>
 
   <!-- 구조화 데이터 -->
   <script type="application/ld+json">
@@ -111,6 +111,7 @@
   </div>
 </div>
 
+<div class="ticker" aria-hidden="true"><div class="ticker-run"><span><b>AI Music</b><i class="l">/</i><b>Channel Merge</b><i class="r">/</i><b>Live Lyrics</b><i class="l">/</i><b>Rhythm Game</b><i class="r">/</i><b>Photo to Music</b><i class="l">/</i><b>Live Wire</b><i class="r">/</i></span><span><b>AI Music</b><i class="l">/</i><b>Channel Merge</b><i class="r">/</i><b>Live Lyrics</b><i class="l">/</i><b>Rhythm Game</b><i class="r">/</i><b>Photo to Music</b><i class="l">/</i><b>Live Wire</b><i class="r">/</i></span></div></div>
 <section id="series">
   <div class="wrap">
     <div class="head">
@@ -187,6 +188,12 @@
       <a class="btn primary" href="https://apps.apple.com/us/app/stero-lite/id6758091280" target="_blank" rel="noopener">App Store에서 받기</a>
       <p class="note">말이나 사진으로 곡을 만들고, 가사를 따라 부르고, 리듬 게임과 Live Wire로 함께 즐기는 STÉRO의 대표 앱이에요. 한국어 · English · 日本語.</p>
     </div>
+    <ul class="peek" aria-label="STÉRO MUSIC 주요 기능 바로가기">
+      <li><a href="#m-gen"><img src="assets/images/site/m-gen.webp" alt="" loading="lazy"><span class="peek-t"><span class="mono ko">01 · AI 음악 생성</span><b>말로 만드는 나만의 곡</b><span class="go" aria-hidden="true">자세히 ↓</span></span></a></li>
+      <li><a href="#m-lyrics"><img src="assets/images/site/m-lyrics.webp" alt="" loading="lazy"><span class="peek-t"><span class="mono ko">04 · 실시간 가사</span><b>흐르는 가사를 따라 부르기</b><span class="go" aria-hidden="true">자세히 ↓</span></span></a></li>
+      <li><a href="#m-merge"><img src="assets/images/site/ios-9.webp" alt="" loading="lazy"><span class="peek-t"><span class="mono ko">06 · 채널 합성</span><b>두 곡을 L과 R로 나눠 하나로</b><span class="go" aria-hidden="true">자세히 ↓</span></span></a></li>
+      <li><a href="#m-rhythm"><img src="assets/images/site/m-rhythm.webp" alt="" loading="lazy"><span class="peek-t"><span class="mono ko">07 · 리듬 게임</span><b>내가 만든 곡으로 리듬 대결</b><span class="go" aria-hidden="true">자세히 ↓</span></span></a></li>
+    </ul>
     <div class="story">
       <div class="phone-col">
         <div class="phone"><div class="screen" id="screen">
@@ -203,42 +210,42 @@
         <div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <ol class="steps">
-        <li class="step on" data-k="gen">
+        <li id="m-gen" class="step on" data-k="gen">
           <p class="mono ko">01 · AI 음악 생성</p>
           <h3>말로 만드는 나만의 곡</h3>
           <p>음악 생성 탭에서 원하는 분위기를 채팅으로 말하세요. STÉRO가 장르, 템포, 악기, 가사 방향을 담은 설계서를 먼저 보여 주고, 확인하면 두 곡을 만들어요. 허밍을 녹음해 시작할 수도 있어요.</p>
           <div class="chips"><span class="chip">V6 · V6 Wild · V6 Mini</span><span class="chip ko">허밍으로 시작</span><span class="chip ko">다른 버전 비교</span></div>
           <img class="inline" src="assets/images/site/m-gen.webp" alt="AI 음악 생성 화면" loading="lazy">
         </li>
-        <li class="step" data-k="photo">
+        <li id="m-photo" class="step" data-k="photo">
           <p class="mono ko">02 · 사진으로 음악</p>
           <h3>사진 한 장의 분위기를 곡으로</h3>
           <p>입력창의 +로 사진을 올리면 STÉRO가 장면의 분위기를 읽고 그에 맞는 곡을 설계해요. 오늘 찍은 사진이 그대로 한 곡이 됩니다.</p>
           <div class="chips"><span class="chip ko">사진 첨부</span><span class="chip ko">분위기 분석</span></div>
           <img class="inline" src="assets/images/site/m-photo.webp" alt="사진으로 음악 화면" loading="lazy">
         </li>
-        <li class="step" data-k="library">
+        <li id="m-library" class="step" data-k="library">
           <p class="mono ko">03 · 라이브러리</p>
           <h3>만든 곡을 한 책장에</h3>
           <p>좋아요와 싫어요로 고르고, 검색과 필터로 찾아요. 곡 제목 옆에서 가사를 바로 보고, 마음에 드는 곡은 선물 코드로 친구에게 보낼 수 있어요.</p>
           <div class="chips"><span class="chip ko">좋아요 · 싫어요</span><span class="chip ko">가사 보기</span><span class="chip ko">선물 코드</span></div>
           <img class="inline" src="assets/images/site/m-library.webp" alt="라이브러리 화면" loading="lazy">
         </li>
-        <li class="step" data-k="lyrics">
+        <li id="m-lyrics" class="step" data-k="lyrics">
           <p class="mono ko">04 · 실시간 가사</p>
           <h3>흐르는 가사를 따라 부르기</h3>
           <p>재생 중인 위치에 맞춰 가사가 한 줄씩 떠올라요. 글꼴 크기와 색, 효과를 내 취향대로 바꿀 수 있어요.</p>
           <div class="chips"><span class="chip ko">가사 싱크</span><span class="chip ko">글꼴 · 색 설정</span></div>
           <img class="inline" src="assets/images/site/m-lyrics.webp" alt="실시간 가사 화면" loading="lazy">
         </li>
-        <li class="step" data-k="player">
+        <li id="m-player" class="step" data-k="player">
           <p class="mono ko">05 · 플레이어 · 테마</p>
           <h3>내 음악 파일을 바로 재생</h3>
           <p>파일 앱에서 곡을 불러오면 플레이리스트로 정리돼요. 10밴드 EQ와 재생 속도를 조절하고, 컬러 테마와 아트 테마로 배경을 바꿔요. 화면 가장자리를 밀면 어느 탭에서나 미니 플레이어가 열려요.</p>
           <div class="chips"><span class="chip ko">10밴드 EQ</span><span class="chip ko">재생 속도</span><span class="chip ko">컬러 · 아트 테마</span><span class="chip ko">엣지 미니 플레이어</span></div>
           <img class="inline" src="assets/images/site/ios-2.webp" alt="플레이어 · 테마 화면" loading="lazy">
         </li>
-        <li class="step" data-k="merge">
+        <li id="m-merge" class="step" data-k="merge">
           <p class="mono ko">06 · 채널 합성</p>
           <h3>두 곡을 L과 R로 나눠 하나로</h3>
           <p>한 곡은 왼쪽, 다른 곡은 오른쪽 채널에 놓고 섞어요. 아래에서 직접 들어 보세요.</p>
@@ -251,21 +258,21 @@
           <a class="btn primary merge-cta" href="merge.html">내 음원으로 웹에서 합성하기 →</a>
           <img class="inline" src="assets/images/site/ios-9.webp" alt="채널 합성 화면" loading="lazy">
         </li>
-        <li class="step" data-k="rhythm">
+        <li id="m-rhythm" class="step" data-k="rhythm">
           <p class="mono ko">07 · 리듬 게임</p>
           <h3>내가 만든 곡으로 리듬 대결</h3>
           <p>만든 곡이 그대로 리듬 게임 악보가 돼요. 글로벌 랭킹에서 친구와 점수를 겨뤄 보세요.</p>
           <div class="chips"><span class="chip ko">내 곡으로 플레이</span><span class="chip ko">글로벌 랭킹</span></div>
           <img class="inline" src="assets/images/site/m-rhythm.webp" alt="리듬 게임 화면" loading="lazy">
         </li>
-        <li class="step" data-k="lab">
+        <li id="m-lab" class="step" data-k="lab">
           <p class="mono">08 · Lab</p>
           <h3>새 도구를 먼저 써 보기</h3>
           <p>Lab에는 Live Wire ShortCut 영상 편집기, AI 배경 생성처럼 새로 만든 도구가 먼저 들어와요. Lab 크레딧은 구독에 포함돼요.</p>
           <div class="chips"><span class="chip">ShortCut</span><span class="chip ko">AI 배경</span><span class="chip ko">Starter 3 · Basic 8 · Creator 20회/월</span></div>
           <img class="inline" src="assets/images/site/m-lab.webp" alt="Lab 화면" loading="lazy">
         </li>
-        <li class="step" data-k="lang">
+        <li id="m-lang" class="step" data-k="lang">
           <p class="mono ko">09 · 다국어</p>
           <h3>한국어, 영어, 일본어로</h3>
           <p>앱 화면과 STÉRO와의 대화를 한국어, 영어, 일본어로 쓸 수 있어요.</p>

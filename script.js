@@ -252,6 +252,16 @@
     }), { rootMargin: '-45% 0px -45% 0px' });
     steps.forEach(s => io.observe(s));
   });
+  /* ---------- 헤더 메뉴: 지금 보고 있는 섹션 표시 ---------- */
+  const navLinks = [...document.querySelectorAll('.top nav a[href^="#"]')];
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    const a = navLinks.find(n => n.getAttribute('href') === '#' + e.target.id);
+    if (!a) return;
+    if (e.isIntersecting) { navLinks.forEach(n => n.removeAttribute('aria-current')); a.setAttribute('aria-current', 'location'); }
+    else a.removeAttribute('aria-current');
+  }), { rootMargin: '-45% 0px -55% 0px' });
+  navLinks.forEach(n => { const s = document.getElementById(n.getAttribute('href').slice(1)); if (s) spy.observe(s); });
+
   const cards = document.getElementById('cards');
   const by = d => cards.scrollBy({ left: d * (cards.querySelector('figure').offsetWidth + 16), behavior: reduce ? 'auto' : 'smooth' });
   document.getElementById('cPrev').addEventListener('click', () => by(-1));
