@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시·테스트 중인 앱(STÉRO MUSIC iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
+STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시·테스트 중인 앱(STÉRO Lite iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 출시 예정인 새 앱 STÉRO Music은 `#music`에서, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
 - App Store: https://apps.apple.com/us/app/stero-lite/id6758091280 · Instagram: https://www.instagram.com/stero_lite/
 - 배포: GitHub Pages, 도메인 `stero.co.kr`(`CNAME`). 메타 태그의 절대 URL(`og:url`·`og:image`·`twitter:*`)도 이 도메인으로 통일 (옛 `sterolite.app` 쓰지 않음)
 - 빌드 도구, 패키지 매니저, 프레임워크, 테스트 없음 — 순수 HTML/CSS/JS. `main`에 푸시하면 바로 배포됨.
@@ -42,16 +42,17 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 페이지 구조
 
-- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → `.ticker`(윤곽선 글자 띠, 장식이라 `aria-hidden`) → 트랙리스트(Side A 출시·테스트 / Side B 개발 중) → AI 채팅 소개 → `#music`(`.peek` 주요 기능 타일 4장 — 각 타일이 사용법 단계의 `id="m-<data-k>"`로 이동 — + 사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → `#get`(마무리: 받는 곳 카드 3장 — App Store / Android 비공개 테스트 상태 / 웹 채널 합성) → 푸터. 헤더 오른쪽 `.nav-cta`(App Store)는 720px 미만에서 메뉴가 숨겨져도 남는다(`merge.html`에도 있음)
+- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → `.ticker`(윤곽선 글자 띠, 장식이라 `aria-hidden`) → 트랙리스트(Side A 출시·테스트: Lite iOS·Lite Android·Studio / Side B: 출시 예정 STÉRO Music + 개발 중 3개) → AI 채팅 소개 → `#ios`(STÉRO Lite iOS — 지금 App Store에 있는 앱. `.peek` 주요 기능 타일 4장 — 각 타일이 사용법 단계의 `id="m-<data-k>"`로 이동 — + 사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(`.mv` 뮤직비디오 소개: 화면 5장 + 무료 템플릿·AI 뮤직비디오 표 + 사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#music`(STÉRO Music 출시 예정: 새 도트 아이콘 + `.cast` 리듬 게임 캐릭터 17명 무대) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → `#get`(마무리: 받는 곳 카드 3장 — App Store / Google Play(공개 테스트, `com.stero.lite`) / 웹 채널 합성) → 푸터. 헤더 오른쪽 `.nav-cta`(App Store)는 720px 미만에서 메뉴가 숨겨져도 남는다(`merge.html`에도 있음)
 - `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
-- `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO MUSIC 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
-- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO MUSIC 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 CSS 오로라 레이어(`.aurora i` 4개, script.js가 transform·opacity만 바꿈 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 24~40fps로 떨어진다) + 캔버스(4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼, 헤더 메뉴의 현재 섹션 표시(`aria-current="location"`)
+- `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO Lite iOS 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
+- `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO Lite iOS 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 CSS 오로라 레이어(`.aurora i` 4개, script.js가 transform·opacity만 바꿈 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 24~40fps로 떨어진다) + 캔버스(4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼, 헤더 메뉴의 현재 섹션 표시(`aria-current="location"`)
 
-## 앱 이름 표기 (법적 문서 편집 시 중요)
+## 앱 이름 표기 (2026-11-26 사용자 결정)
 
-- iOS 앱: 배포된 법적 문서는 "**STÉRO Lite** (App Store 현재 이름, 이후 업데이트에서 STÉRO MUSIC으로 변경 예정)". 2.2 개정안(미커밋)부터는 "**STÉRO Music** (이전 이름 STÉRO Lite)"로 바뀐다 — 개정안이 시행되면 이 표기로 통일. 과거 변경 이력 문단의 옛 이름은 기록이므로 고치지 않는다
-- 홈페이지(`index.html`·`merge.html`)는 아직 대문자 **STÉRO MUSIC** 표기 — 법적 문서와 맞추는 정리가 열린 과제
-- Android 앱: **STÉRO Lite**
+- **STÉRO Lite iOS**: 지금 App Store에 있는 기존 iOS 앱(`com.STERO-Lite`, 링크 `…/stero-lite/id6758091280`). 홈페이지에서는 이 이름으로 부른다(예전 표기 "STÉRO MUSIC"은 쓰지 않음)
+- **STÉRO Music**: 새로 나올 iOS 앱(`com.stero.music`, v1.0) — **출시 예정**으로 표기하고 받기 링크를 달지 않는다. 리듬 게임 캐릭터·광장은 이 앱의 기능
+- **STÉRO Lite**(Android): Google Play 공개 테스트. 메뉴처럼 둘을 구분해야 하는 곳에서는 "Lite Android"
+- 법적 문서(2.2, `8b988b8`)는 iOS 앱을 "STÉRO Music (이전 이름 STÉRO Lite)"라고 적고 있어 위 결정과 다르다 — 고칠지는 사용자 확인이 필요한 열린 과제. 과거 변경 이력 문단의 옛 이름은 기록이므로 고치지 않는다
 - 운영 주체 표기: STÉRO (이하 "회사")
 
 ## 법적 문서 개정 규칙
@@ -72,15 +73,16 @@ python3 -m http.server 8000   # http://localhost:8000
 - 한글이 든 mono 머리글·칩은 `class="mono ko"`·`class="chip ko"`(고정폭 띄어쓰기·자간을 좁힘)
 - 헤더 로고 뒤 `.mark-wave`: 주기 170px 물결을 두 번 그린 SVG 3개를 CSS `translateX(-50%)`로 반복(transform만, JS 없음). 물결 모양을 바꾸면 시작·끝 y가 같아야 이음새가 안 보인다
 - 기기 화면 목업(`.dev`, Cut·3D 가상 화면) 안쪽은 앱 자체 화면이라 테마와 무관한 고정 색을 쓴다
+- `.cast`의 `.px`: `assets/images/site/rhythm-cast.png`(칸 34×52, 캐릭터 17줄 × 8칸 = 가만히 4 + 박자 4)를 2배로 키워 CSS `steps(4)`로 움직인다. 줄 순서는 `--r`(HTML의 이름 순서와 같음). 도트 그림이라 `image-rendering: pixelated`·정수 배만. 원본은 `앱 개발/STERO Music/STÉRO Lite iOS 1.0/STÉRO Lite/Assets.xcassets/RhythmConductorSheet.imageset/`(74줄 중 골라 냄). 무대 색은 게임 화면 색(#0b0c13·#ffd140·#573d96) 고정
 - 클래스 이름 충돌 주의: 상태 배지에 `.beta`·`.dev`처럼 다른 블록이 쓰는 이름을 붙이면 그 스타일(여백·그림자)을 함께 받는다. 상태는 `is-` 접두어(`.status.is-beta`·`.status.is-dev`)
-- 앱 섹션(`#music`·`#lite`·`#studio`·`#lab`)은 머리 쪽에 `--tint` 색의 옅은 radial 빛을 깐다(Lite만 민트 `#3ecf8e`, 나머지는 채널 색). `#get`의 `.outro-wave`는 L·R 두 파형이 오른쪽에서 한 줄로 합쳐지는 정적 SVG
+- 앱 섹션(`#ios`·`#lite`·`#studio`·`#music`·`#lab`)은 머리 쪽에 `--tint` 색의 옅은 radial 빛을 깐다(Lite Android는 민트 `#3ecf8e`, STÉRO Music은 게임 노랑 `#ffd140`, 나머지는 채널 색). `#get`의 `.outro-wave`는 L·R 두 파형이 오른쪽에서 한 줄로 합쳐지는 정적 SVG
 - 이징 `--ease-in`·`--ease-em`. 모션은 CSS 스크롤 연동(`animation-timeline: view()`, 미지원 시 그냥 보임)과 IntersectionObserver
 
 ## 사용법 단계(`.story`)
 
 - 왼쪽 고정 화면(`.phone .screen img[data-k]`)과 오른쪽 단계(`.step[data-k]`)의 `data-k`가 짝. 단계를 추가하면 이미지·단계·`.dots i` 개수를 함께 맞춘다
 - 900px 미만에서는 고정 화면을 숨기고 각 단계 안의 `.inline` 이미지를 보여 준다
-- STÉRO MUSIC 화면은 App Store용 스크린샷(자체 휴대폰 프레임 포함)이라 테두리 없이 둥근 카드로, Lite는 실기기 캡처(`.story.lite`, 비율 1080/2120)
+- STÉRO Lite iOS 화면은 App Store용 스크린샷(자체 휴대폰 프레임 포함)이라 테두리 없이 둥근 카드로, Lite는 실기기 캡처(`.story.lite`, 비율 1080/2120)
 
 ## 접근성 — 편집 시 유지
 
@@ -88,7 +90,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 에셋
 
-- 사이트 이미지: `assets/images/site/*.webp` (원본을 줄여 WebP로 변환한 것). 접두어: `ios-`/`m-`(STÉRO MUSIC), `pad-`(iPad), `card-`(인스타 생일 카드), `lite-`·`and-`(Android), `chat-`(STÉRO Chat), `icon-`(앱 아이콘 — Studio 코랄은 원본 아이콘 색만 바꾼 웹용 변형, `icon-lite`는 새 앱 아이콘 `앱 개발/STERO Lite/STERO Lite Android 2.1/스테로 라이트 앱아이콘(라이트).png`를 192px로 줄인 것. 헤더 로고 `icon-mark`는 투명 배경 그린 음표 `앱 개발/STERO Lite/STERO Lite Android 2.1/음표아이콘.png`의 색상을 골드(43°, 채도 ×1.1)로 고정해 줄인 것. 이미지는 같은 이름으로 바꾸므로 `<img>` 주소에도 `?v=`를 붙여 캐시를 피한다)
+- 사이트 이미지: `assets/images/site/*.webp` (원본을 줄여 WebP로 변환한 것). 접두어: `ios-`/`m-`(STÉRO Lite iOS), `pad-`(iPad), `card-`(인스타 생일 카드), `lite-`·`and-`(Android, `lite-mv-*`는 앱 온보딩용 실기기 캡처 `app/src/main/res/drawable-nodpi/onboard_mv_*_dark.webp`를 440px로 줄인 것), `chat-`(STÉRO Chat), `icon-`(앱 아이콘 — `icon-lite-ios`는 기존 iOS 앱 아이콘, `icon-music`은 STÉRO Music 새 도트 아이콘(`앱 개발/STERO Music/STÉRO Lite iOS 1.0/STÉRO Lite/Assets.xcassets/AppIcon.appiconset/appicon.png`을 192px 무손실로, `image-rendering: pixelated`), Studio 코랄은 원본 아이콘 색만 바꾼 웹용 변형, `icon-lite`는 새 앱 아이콘 `앱 개발/STERO Lite/STERO Lite Android 2.1/스테로 라이트 앱아이콘(라이트).png`를 192px로 줄인 것. 헤더 로고 `icon-mark`는 투명 배경 그린 음표 `앱 개발/STERO Lite/STERO Lite Android 2.1/음표아이콘.png`의 색상을 골드(43°, 채도 ×1.1)로 고정해 줄인 것. 이미지는 같은 이름으로 바꾸므로 `<img>` 주소에도 `?v=`를 붙여 캐시를 피한다)
 - 원본 출처: iOS `앱 개발/STERO Lite/STERO Lite 스크린샷 이미지/`, Android·Chat은 실기기(adb) 캡처와 앱 `drawable-nodpi` 사용 설명 이미지. 실기기 캡처는 상태 표시줄·시스템 바를 잘라 내고, 이메일·관리자 표시 같은 개인 정보는 쓰지 않는다
 - 예전 랜딩의 `assets/images/<번호>.png`, `iPad Pro/`는 현재 페이지에서 쓰지 않는다(`Play.jpg`는 OG 이미지로 사용 중)
 - 파비콘: `assets/images/favicon_io/` (모든 페이지 `<head>`에서 동일하게 참조)

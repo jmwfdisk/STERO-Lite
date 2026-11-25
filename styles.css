@@ -242,7 +242,7 @@ section > .wrap { padding-block: 96px; }
 .status { font: 500 11px/1 var(--mono); letter-spacing: .06em; padding: 5px 8px; border-radius: 4px; }
 .status.live { background: color-mix(in srgb, var(--ch-l) 18%, transparent); color: var(--ch-l); }
 .status.is-dev { background: var(--panel-2); color: var(--muted); }
-.side.b .track .name, .side.b .track img { opacity: .55; }
+.side.b .track:not(.soon) .name, .side.b .track:not(.soon) img { opacity: .55; }
 .ph-icon { width: 52px; height: 52px; border-radius: 12px; border: 1px dashed var(--muted); display: grid; place-items: center; font: 600 13px/1 var(--display); color: var(--muted); }
 @media (max-width: 560px) {
   .track a { grid-template-columns: 30px 44px minmax(0, 1fr); gap: 12px; }
@@ -463,6 +463,55 @@ section > .wrap { padding-block: 96px; }
 @keyframes spin { from { transform: rotateX(-20deg) rotateY(0); } to { transform: rotateX(-20deg) rotateY(360deg); } }
 
 /* STÉRO MUSIC 2.1 BETA */
+/* Lite 뮤직비디오 소개 */
+.mv { display: grid; gap: 36px; margin-bottom: 96px; }
+.mv .beta-head .mono, .more .beta-head .mono { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.mv-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.mv-flow figure { margin: 0; display: grid; gap: 12px; }
+.mv-flow img { display: block; width: 100%; aspect-ratio: 720 / 1407; object-fit: cover; border-radius: 20px; box-shadow: 0 0 0 1px var(--line), 0 24px 48px rgba(0, 0, 0, .28); }
+.mv-flow figcaption { display: grid; gap: 6px; font-size: 14px; line-height: 1.4; }
+.mv-flow figcaption .mono { color: var(--tint, var(--ch-l)); font-size: 11px; }
+.mv-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.mv-opt { padding: 24px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); display: grid; gap: 16px; align-content: start; }
+.mv-opt > .mono { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.mv-opt ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.mv-opt li { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-top: 1px solid var(--line); font-size: 15px; }
+.mv-opt li span { color: var(--muted); }
+.mv-also { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.mv-also .mono { margin-right: 6px; color: var(--muted); }
+@media (max-width: 900px) {
+  .mv-flow { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; scrollbar-width: thin; }
+  .mv-flow li { flex: 0 0 min(210px, 58%); scroll-snap-align: start; }
+  .mv-opts { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) { .mv-opt li { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+/* 리듬 게임 캐릭터 무대 — 게임 화면 색이라 테마와 무관하게 고정 */
+.cast {
+  position: relative; border-radius: 24px; padding: 56px 24px 28px; overflow: hidden; color: #fff;
+  background:
+    radial-gradient(60% 70% at 20% 0%, rgba(150, 120, 230, .28), transparent 70%),
+    radial-gradient(50% 60% at 85% 10%, rgba(255, 209, 64, .12), transparent 70%),
+    #0b0c13;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .10);
+}
+.cast-tag { position: absolute; top: 20px; left: 24px; margin: 0; font: 600 11px/1 var(--mono); letter-spacing: .12em; color: #1a1405; background: #ffd140; padding: 6px 8px; }
+.cast ul { list-style: none; margin: 0 auto; padding: 0; max-width: 900px; display: flex; flex-wrap: wrap; justify-content: center; row-gap: 22px; }
+.cast li { flex: 0 0 100px; display: grid; justify-items: center; gap: 10px; padding-top: 8px; background: linear-gradient(#9678e6, #9678e6) 0 108px / 100% 4px no-repeat, linear-gradient(#573d96, #573d96) 0 112px / 100% 14px no-repeat; }
+.cast li span { font: 500 12px/1.2 var(--body); color: rgba(255, 255, 255, .66); padding-top: 22px; white-space: nowrap; }
+.px {
+  display: block; width: 68px; height: 104px; image-rendering: pixelated;
+  background: url("assets/images/site/rhythm-cast.png?v=20261126a") 0 calc(var(--r) * -104px) / 544px 1768px no-repeat;
+  animation: px-idle .9s steps(4) infinite; animation-delay: calc(var(--r) * -130ms);
+}
+.cast li:nth-child(3n+2) .px, .cast li:hover .px { animation-name: px-beat; animation-duration: .6s; }
+@keyframes px-idle { from { background-position-x: 0; } to { background-position-x: -272px; } }
+@keyframes px-beat { from { background-position-x: -272px; } to { background-position-x: -544px; } }
+@media (max-width: 700px) {
+  .cast { padding-inline: 0; }
+  .cast ul { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 12px; scrollbar-width: thin; }
+  .cast li { flex: 0 0 92px; scroll-snap-align: start; }
+}
 .beta { margin-top: 96px; display: grid; gap: 40px; }
 .beta-head { display: grid; gap: 14px; max-width: 760px; }
 .beta-head h3 { font-size: clamp(28px, 4.4vw, 48px); font-weight: 600; }
@@ -498,8 +547,10 @@ section > .wrap { padding-block: 96px; }
 }
 
 /* 섹션마다 머리 쪽에 옅은 색 빛 — 긴 페이지에서 앱이 바뀌는 지점을 색으로 알린다 */
-#music, #lite, #studio, #lab { background: radial-gradient(70% 520px at 12% 0, color-mix(in srgb, var(--tint) 11%, transparent), transparent 70%) no-repeat; }
-#music { --tint: var(--ch-l); }
+#ios, #music, #lite, #studio, #lab { background: radial-gradient(70% 520px at 12% 0, color-mix(in srgb, var(--tint) 11%, transparent), transparent 70%) no-repeat; }
+#ios { --tint: var(--ch-l); }
+#music { --tint: #ffd140; }
+.px-icon, .track.soon img { image-rendering: pixelated; }
 #lite { --tint: #3ecf8e; }
 #studio { --tint: var(--ch-l); background-position: 100% 0; background-image: radial-gradient(70% 520px at 88% 0, color-mix(in srgb, var(--tint) 9%, transparent), transparent 70%); }
 #lab { --tint: var(--ch-r); }
