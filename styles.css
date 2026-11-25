@@ -488,7 +488,14 @@ section > .wrap { padding-block: 96px; }
 
 /* STÉRO Music 소개 */
 .m-app { display: grid; gap: 32px; }
-.m-tabs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.m-news { display: grid; grid-template-columns: minmax(0, 1fr) min(300px, 34%); gap: clamp(24px, 5vw, 72px); align-items: center; }
+.m-soon { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 15px !important; }
+.m-reel { margin: 0; display: grid; gap: 10px; justify-items: center; }
+.m-reel video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: 24px; background: #e9d9f5; box-shadow: 0 0 0 1px var(--line), 0 30px 60px rgba(0, 0, 0, .35); }
+.m-reel figcaption { color: var(--muted); }
+.prod-head .note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) { .m-news { grid-template-columns: minmax(0, 1fr); } .m-reel video { max-width: 280px; } }
+.m-tabs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .m-tabs li { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); }
 .m-tabs img { width: 56px; height: 56px; margin-bottom: 6px; }
 .m-tabs b { font: 600 17px/1.3 var(--body); }
