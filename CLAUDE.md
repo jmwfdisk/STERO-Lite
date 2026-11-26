@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시·테스트 중인 앱(STÉRO Lite iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 출시 예정인 새 앱 STÉRO Music은 `#music`에서, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
+STÉRO 앱 시리즈의 정적 홈페이지 + 법적 고지 페이지입니다. 출시된 앱(STÉRO Lite iOS, STÉRO Lite Android, 곰곰디스크 안의 STÉRO Studio 웹)은 자세히, 출시 예정인 새 앱 STÉRO Music은 `#music`에서, 개발 중인 앱(Chat·Cut·3D)은 Lab에서 소개만 합니다.
 - App Store: https://apps.apple.com/us/app/stero-lite/id6758091280 · Instagram: https://www.instagram.com/stero_lite/
 - 배포: GitHub Pages, 도메인 `stero.co.kr`(`CNAME`). 메타 태그의 절대 URL(`og:url`·`og:image`·`twitter:*`)도 이 도메인으로 통일 (옛 `sterolite.app` 쓰지 않음)
 - 빌드 도구, 패키지 매니저, 프레임워크, 테스트 없음 — 순수 HTML/CSS/JS. `main`에 푸시하면 바로 배포됨.
@@ -42,7 +42,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 페이지 구조
 
-- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → `.ticker`(윤곽선 글자 띠, 장식이라 `aria-hidden`) → 트랙리스트(Side A 출시·테스트: Lite iOS·Lite Android·Studio / Side B: 출시 예정 STÉRO Music + 개발 중 3개) → AI 채팅 소개 → `#ios`(STÉRO Lite iOS — 지금 App Store에 있는 앱. `.peek` 주요 기능 타일 4장 — 각 타일이 사용법 단계의 `id="m-<data-k>"`로 이동 — + 사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(`.mv` 뮤직비디오 소개: 화면 5장 + 무료 템플릿·AI 뮤직비디오 표 + 사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#music`(STÉRO Music 출시 예정: 새 도트 아이콘 → `.m-app`(새 소식 문구 + 릴스 소개 영상 `assets/video/stero-music-reel.mp4` — 자동 재생 없이 `controls`·`preload="none"`·포스터, 기능 카드 8개와 앱의 3D 아이콘) → 리듬 게임 소개(`.m-game`: 상점 실제 화면 + 광장 시안 2장 + 게임 메뉴 표, `.m-bgs` 무대 배경 5종) → `.cast` 캐릭터 17명 무대) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → `#get`(마무리: 받는 곳 카드 3장 — App Store / Google Play(공개 테스트, `com.stero.lite`) / 웹 채널 합성) → 푸터. 헤더 오른쪽 `.nav-cta`(App Store)는 720px 미만에서 메뉴가 숨겨져도 남는다(`merge.html`에도 있음)
+- `index.html` — 시리즈 한 페이지: Hero(L/R 파형) → `.ticker`(윤곽선 글자 띠, 장식이라 `aria-hidden`) → 트랙리스트(Side A 출시: Lite iOS·Lite Android·Studio / Side B: 출시 예정 STÉRO Music + 개발 중 3개) → AI 채팅 소개 → `#ios`(STÉRO Lite iOS — 지금 App Store에 있는 앱. `.peek` 주요 기능 타일 4장 — 각 타일이 사용법 단계의 `id="m-<data-k>"`로 이동 — + 사용법 9단계 + iPad + 생일 카드 띠 + 2.1 BETA) → `#lite`(`.mv` 뮤직비디오 소개: 화면 5장 + 무료 템플릿·AI 뮤직비디오 표 + 사용법 9단계 + 테마) → `#studio`(소개만, 링크 없음) → `#music`(STÉRO Music 출시 예정: 새 도트 아이콘 → `.m-app`(새 소식 문구 + 릴스 소개 영상 `assets/video/stero-music-reel.mp4` — 자동 재생 없이 `controls`·`preload="none"`·포스터, 기능 카드 8개와 앱의 3D 아이콘) → 리듬 게임 소개(`.m-game`: 상점 실제 화면 + 광장 시안 2장 + 게임 메뉴 표, `.m-bgs` 무대 배경 5종) → `.cast` 캐릭터 17명 무대) → `#lab`(Chat 실제 화면, Cut·3D 가상 화면) → `#get`(마무리: 받는 곳 카드 3장 — App Store / Google Play(`com.stero.lite`) / 웹 채널 합성) → 푸터. 헤더 오른쪽 `.nav-cta`(App Store)는 720px 미만에서 메뉴가 숨겨져도 남는다(`merge.html`에도 있음)
 - `terms.html`, `privacy.html`, `delete-account.html` — 한글 법적 문서. **스토어에 등록된 주소라 경로를 바꾸지 않는다.** 셋 다 `.privacy-page` / `.privacy-container` / `.back-link`만 쓰고 `styles.css` 맨 아래 "법적 문서" 블록이 스타일을 담당. `script.js`는 불러오지 않음
 - `merge.html` + `merge.js` — 웹 채널 합성 도구(STÉRO Lite iOS 채널 합성과 같은 방식: L 파일·R 파일을 각각 모노로 섞어 좌/우 채널에, 길이는 긴 쪽, 채널별 -12~+12dB). **파일은 브라우저 안에서만 처리하고 어디로도 전송하지 않는다** — 이 전제가 페이지의 개인정보·저작권 안내와 맞물려 있으니 업로드·분석 코드를 넣지 말 것. 저작권 동의 체크 두 개가 모두 켜져야 `<fieldset id="tool">`이 열린다. 미리듣기와 내보내기가 같은 `build()` 그래프(OfflineAudioContext → 16bit WAV)를 쓴다. 15분 초과 파일은 거부
 - `script.js` — Hero 캔버스 파형 + Web Audio 데모(L 패드·R 아르페지오). 소리는 "소리 켜기" 버튼이나 Hero 채널 합성 슬라이더를 처음 움직일 때만 시작(자동재생 없음). Hero 슬라이더(`#heroSep`)와 STÉRO Lite iOS 사용법 06 슬라이더(`#sep`)는 `setMerge()` 하나로 연동되고, 95% 이상 합치면 `#mixer[data-merged]`가 켜져 `merge.html`로 가는 안내가 강조된다. 파형 수렴 정도 = max(스크롤 진행, 슬라이더 값). Hero 배경은 CSS 오로라 레이어(`.aurora i` 4개, script.js가 transform·opacity만 바꿈 — 캔버스에 큰 그라디언트를 매 프레임 칠하면 Safari가 24~40fps로 떨어진다) + 캔버스(4겹 파형 리본·빛 입자, 소리 크기에 반응) 위에 `.hero::before` 유리층(옅은 어둠/밝음 + 노이즈. **backdrop-filter 금지** — Safari와 Chrome이 캔버스를 다르게 흐림)과 `::after` 사선 반사광을 얹은 구조. 매 프레임 이전 화면을 50%만 지워 모션 블러 꼬리를 남기므로 빛의 한 프레임 세기는 낮게 둔다(쌓이면 약 2배). 물결은 실제 시간 기준(`performance.now`)으로 진행한다. Hero 파형 모양은 실제 오디오 샘플이 아니라 부드러운 물결로 그리고 소리는 채널별 높이·빛으로만 반영한다 — 샘플 모양을 쓰면 꼬리·유리 블러와 겹쳐 가로 띠처럼 굳어 보인다. 1024px 이상에서 체험 박스(`.mixer`)는 두 단 grid. 색 토큰을 못 읽으면 기본값으로 그리고, `draw()` 예외가 나도 루프는 계속된다. `.story`별 사용법 단계 전환(IntersectionObserver), 생일 카드 띠 이전/다음 버튼, 헤더 메뉴의 현재 섹션 표시(`aria-current="location"`)
@@ -51,7 +51,7 @@ python3 -m http.server 8000   # http://localhost:8000
 
 - **STÉRO Lite iOS**: 지금 App Store에 있는 기존 iOS 앱(`com.STERO-Lite`, 링크 `…/stero-lite/id6758091280`). 홈페이지에서는 이 이름으로 부른다(예전 표기 "STÉRO MUSIC"은 쓰지 않음)
 - **STÉRO Music**: 새로 나올 iOS 앱(`com.stero.music`, v1.0) — **출시 예정**으로 표기하고 받기 링크를 달지 않는다. 리듬 게임 캐릭터·광장은 이 앱의 기능
-- **STÉRO Lite**(Android): Google Play 공개 테스트. 메뉴처럼 둘을 구분해야 하는 곳에서는 "Lite Android"
+- **STÉRO Lite**(Android): Google Play 정식 출시(2026-11-26 스토어 "새로운 기능"의 정식 출시 노트로 확인). 메뉴처럼 둘을 구분해야 하는 곳에서는 "Lite Android"
 - 법적 문서(2.2, `8b988b8`)는 iOS 앱을 "STÉRO Music (이전 이름 STÉRO Lite)"라고 적고 있어 위 결정과 다르다 — 고칠지는 사용자 확인이 필요한 열린 과제. 과거 변경 이력 문단의 옛 이름은 기록이므로 고치지 않는다
 - 운영 주체 표기: STÉRO (이하 "회사")
 
